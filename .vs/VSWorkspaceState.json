@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\BackEnd with ASP.Net Web API",
+    "\\BackEnd with ASP.Net Web API\\ElectroEcommerce",
+    "\\BackEnd with ASP.Net Web API\\ElectroEcommerce\\ElectroEcommerce"
   ],
+  "SelectedNode": "\\BackEnd with ASP.Net Web API\\ElectroEcommerce\\ElectroEcommerce\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
