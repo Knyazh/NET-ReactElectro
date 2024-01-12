@@ -17,8 +17,12 @@ public class ProductController : ControllerBase
 		_dataContext = dataContext;
 	}
 
-	[HttpPost]
-	public async Task<ActionResult<List<ProductModel>>> AddUser(ProductModel product)
+	
+
+
+
+	[HttpPost("add-product")]
+	public async Task<ActionResult<List<ProductModel>>> Add(ProductModel product)
 	{
 		_dataContext.Products.Add(product);
 		await _dataContext.SaveChangesAsync();
