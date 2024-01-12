@@ -1,4 +1,5 @@
-﻿using ElectroEcommerce.Models;
+﻿using ElectroEcommerce.Migrations;
+using ElectroEcommerce.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -34,9 +35,30 @@ public class CategoryController : ControllerBase
 	public async Task<ActionResult<Category>> Get(Guid id)
 	{
 		var category = await _dataContext.Categories.FindAsync(id);
-		if (category == null) { return NotFound("Category not found")};
+		if (category == null) { return NotFound("Category not found"); }
 
 			return Ok(category);
+	}
+
+	[HttpPut("update-categroy/{id}")]
+	public async Task<ActionResult<List<Category>>> Update(Category request,Guid id)
+	{
+		var category = await _dataContext.Categories.FindAsync(id);
+		if (category == null) { return NotFound("Category not exist"); }
+		category.Name = request.Name;
+		category.Description = request.Description;
+		await _dataContext.SaveChangesAsync();
+		return Ok(category);
+	}
+
+	[HttpDelete("delete-category-id/{id}")]
+	public async Task<ActionResult<List<Category>>> Delete(Guid id)
+	{
+		var category = await _dataContext.Categories.FindAsync(id);
+		if (category == null) { return NotFound("Category not found"); }
+		_dataContext.Remove(category);
+		await _dataContext.SaveChangesAsync();
+		return Ok(category);
 	}
 
 
