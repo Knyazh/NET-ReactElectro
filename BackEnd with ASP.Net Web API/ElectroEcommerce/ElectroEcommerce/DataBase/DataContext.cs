@@ -16,5 +16,7 @@ public class DataContext : DbContext
 
 	public	DbSet<ProductModel> Products { get; set; }
 
+	public DbSet<Category> Categories { get; set; }
+
 
 }

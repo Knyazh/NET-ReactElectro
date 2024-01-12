@@ -1,40 +1,39 @@
-using ElectroEcommerce.DataBase;
+global using  ElectroEcommerce.DataBase;
 using Microsoft.EntityFrameworkCore;
 
-namespace ElectroEcommerce
+namespace  ElectroEcommerce;
+
+public class Program
 {
-	public class Program
+	public static void Main(string[] args)
 	{
-		public static void Main(string[] args)
+		var builder = WebApplication.CreateBuilder(args);
+
+
+
+		builder.Services.AddControllers();
+		builder.Services.AddDbContext<DataContext>(options =>
 		{
-			var builder = WebApplication.CreateBuilder(args);
+			options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
+		});
+		builder.Services.AddEndpointsApiExplorer();
+		builder.Services.AddSwaggerGen();
 
+		var app = builder.Build();
 
-
-			builder.Services.AddControllers();
-			builder.Services.AddDbContext<DataContext>(options =>
-			{
-				options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
-			});
-			builder.Services.AddEndpointsApiExplorer();
-			builder.Services.AddSwaggerGen();
-
-			var app = builder.Build();
-
-			if (app.Environment.IsDevelopment())
-			{
-				app.UseSwagger();
-				app.UseSwaggerUI();
-			}
-
-			app.UseHttpsRedirection();
-
-			app.UseAuthorization();
-
-
-			app.MapControllers();
-
-			app.Run();
+		if (app.Environment.IsDevelopment())
+		{
+			app.UseSwagger();
+			app.UseSwaggerUI();
 		}
+
+		app.UseHttpsRedirection();
+
+		app.UseAuthorization();
+
+
+		app.MapControllers();
+
+		app.Run();
 	}
 }
