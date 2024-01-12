@@ -17,9 +17,6 @@ public class ProductController : ControllerBase
 		_dataContext = dataContext;
 	}
 
-	
-
-
 
 	[HttpPost("add-product")]
 	public async Task<ActionResult<List<ProductModel>>> Add(ProductModel product)

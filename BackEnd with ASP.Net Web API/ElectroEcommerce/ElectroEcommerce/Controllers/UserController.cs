@@ -53,9 +53,6 @@ public class UserController : ControllerBase
 	}
 
 
-
-
-
 	[HttpPost("add-user")]
 	public async Task<ActionResult<List<User>>> AddUser(User user)
 	{
@@ -81,8 +78,23 @@ public class UserController : ControllerBase
 		await _dataContext.SaveChangesAsync();
 
 		return Ok(user);
-
 	}
+
+	[HttpPut("update-user/{id}")]
+	public async Task<ActionResult<List<User>>> Update(User request)
+	{
+		var user = await _dataContext.Users.FindAsync(request.Id);
+		if (user == null) { return NotFound("user not found"); }
+		user.Name = request.Name;
+		user.Email = request.Email;
+		user.LastName = request.LastName;
+		user.Password = request.Password;
+
+		await _dataContext.SaveChangesAsync();
+		return Ok(user);
+	}
+
+
 
 
 
