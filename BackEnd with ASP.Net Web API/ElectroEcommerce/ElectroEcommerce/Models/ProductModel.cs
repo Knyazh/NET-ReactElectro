@@ -8,7 +8,6 @@ public class ProductModel
 	public decimal Price { get; set; } = 0;
 	
 	public decimal Brand { get; set; }= 0;
-	public decimal BrandTotal { get;}= 0;
 	public DateTime CreatedDate { get; set; }= DateTime.Now;
 
 

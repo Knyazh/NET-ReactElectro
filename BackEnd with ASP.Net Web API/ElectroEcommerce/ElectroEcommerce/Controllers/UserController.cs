@@ -36,13 +36,20 @@ public class UserController : ControllerBase
 
 
 	[HttpGet("get-user-name/{name}")]
-	public async Task<ActionResult<User>> Get(string name)
+	public async Task<ActionResult<ICollection<User>>> Get(string name)
 	{
-		var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Name.ToLower() == name.ToLower());
+		var users = await _dataContext.Users
+			.Where(u => u.Name.ToLower() == name.ToLower())
+			.ToListAsync();
 
-		if (user == null) { return NotFound("Username is not found"); }
-		return Ok(user);
+		if (users == null || !users.Any())
+		{
+			return NotFound("No users found with the specified name.");
+		}
+
+		return Ok(users);
 	}
+
 
 	[HttpGet("get-user-email/{email}")]
 	public async Task<ActionResult<User>> GetUserByEmail(string email)
