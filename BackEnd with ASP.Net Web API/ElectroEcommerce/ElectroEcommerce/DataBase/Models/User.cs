@@ -1,4 +1,5 @@
-﻿using ElectroEcommerce.DataBase.Base;
+﻿using ElectroEcommerce.Contracts;
+using ElectroEcommerce.DataBase.Base;
 
 namespace ElectroEcommerce.DataBase.Models;
 
@@ -11,4 +12,8 @@ public class User : BaseEntity<Guid> , IAuditable
     public string Password { get; set; } = string.Empty;
 	public DateTime CreatedAt { get ; set ; }
 	public DateTime UpdatedAt { get; set; }
+    public Role.Values Role { get; set; }
+    public List<Order> Orders { get; set; }
+
 }
+

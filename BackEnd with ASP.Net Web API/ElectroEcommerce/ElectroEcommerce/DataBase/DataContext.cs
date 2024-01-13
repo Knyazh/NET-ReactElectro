@@ -8,6 +8,7 @@ public class DataContext : DbContext
 {
 	public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
+
 	public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
 	{
 		foreach (var entry in ChangeTracker.Entries())
@@ -34,6 +35,9 @@ public class DataContext : DbContext
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
+
+		modelBuilder.ApplyConfigurationsFromAssembly(typeof (DataContext).Assembly);
+
 		base.OnModelCreating(modelBuilder);
 		modelBuilder.Entity<User>().HasData(
 
