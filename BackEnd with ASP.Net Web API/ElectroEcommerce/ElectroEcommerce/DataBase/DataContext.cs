@@ -1,4 +1,5 @@
-﻿using ElectroEcommerce.DataBase.Models;
+﻿using ElectroEcommerce.DataBase.Base;
+using ElectroEcommerce.DataBase.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ElectroEcommerce.DataBase;
@@ -6,6 +7,30 @@ namespace ElectroEcommerce.DataBase;
 public class DataContext : DbContext
 {
 	public DataContext(DbContextOptions<DataContext> options) : base(options) { }
+
+	public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+	{
+		foreach (var entry in ChangeTracker.Entries())
+		{
+
+			if (entry.Entity is not IAuditable)
+				continue;
+
+			IAuditable auditable = entry.Entity as IAuditable;
+			if(entry.State == EntityState.Added)
+			{
+				auditable.CreatedAt = DateTime.UtcNow;
+				auditable.UpdatedAt = DateTime.UtcNow;
+			}
+			else if (entry.State == EntityState.Modified)
+			{
+				auditable.UpdatedAt = DateTime.UtcNow;
+			}
+
+		}
+
+		return await base.SaveChangesAsync(cancellationToken);
+	}
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
