@@ -11,4 +11,6 @@ public class ProductModel : BaseEntity<Guid>, IAuditable
     public decimal Brand { get; set; } = 0;
 	public DateTime CreatedAt { get; set; }
 	public DateTime UpdatedAt { get; set; }
+
+	public List<ProductColor> ProductColors { get; set; }
 }

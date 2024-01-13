@@ -7,4 +7,5 @@ public class Color : BaseEntity<Guid>, IAuditable
 	public string Name { get; set; }
 	public DateTime CreatedAt { get ; set ; }
 	public DateTime UpdatedAt { get; set ; }
+	public List<ProductColor> ProductColors { get; set; }
 }

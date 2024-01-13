@@ -59,6 +59,10 @@ public class DataContext : DbContext
 	public DbSet<ProductModel> Products { get; set; }
 
 	public DbSet<Category> Categories { get; set; }
+	public DbSet<Order> Orders { get; set; }
+	public DbSet<Color> Colors{ get; set; }
+	public DbSet<ProductColor> ProductColors { get; set; }
+
 
 
 }
