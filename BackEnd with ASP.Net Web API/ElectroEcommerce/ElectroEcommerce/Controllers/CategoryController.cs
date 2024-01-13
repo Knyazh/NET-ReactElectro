@@ -1,5 +1,5 @@
-﻿using ElectroEcommerce.Migrations;
-using ElectroEcommerce.Models;
+﻿using ElectroEcommerce.DataBase.Models;
+using ElectroEcommerce.Migrations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

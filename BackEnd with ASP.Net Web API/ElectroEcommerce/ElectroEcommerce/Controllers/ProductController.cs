@@ -1,5 +1,5 @@
 ﻿using ElectroEcommerce.DataBase;
-using ElectroEcommerce.Models;
+using ElectroEcommerce.DataBase.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
