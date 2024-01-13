@@ -1,6 +1,8 @@
-﻿namespace ElectroEcommerce.DataBase.Models;
+﻿using ElectroEcommerce.DataBase.Base;
 
-public class User
+namespace ElectroEcommerce.DataBase.Models;
+
+public class User : BaseEntity<Guid> , IAuditable
 {
 
     public Guid Id { get; set; }
@@ -8,5 +10,6 @@ public class User
     public string LastName { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
-
+	public DateTime CreatedAt { get ; set ; }
+	public DateTime UpdatedAt { get; set; }
 }

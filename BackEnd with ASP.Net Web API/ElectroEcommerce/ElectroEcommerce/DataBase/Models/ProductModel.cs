@@ -1,14 +1,14 @@
-﻿namespace ElectroEcommerce.DataBase.Models;
+﻿using ElectroEcommerce.DataBase.Base;
 
-public class ProductModel
+namespace ElectroEcommerce.DataBase.Models;
+
+public class ProductModel : BaseEntity<Guid>, IAuditable
 {
-    public Guid Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public decimal Price { get; set; } = 0;
 
     public decimal Brand { get; set; } = 0;
-    public DateTime CreatedDate { get; set; } = DateTime.Now;
-
-
+	public DateTime CreatedAt { get; set; }
+	public DateTime UpdatedAt { get; set; }
 }

@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ElectroEcommerce.DataBase.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace ElectroEcommerce.DataBase.Models;
 
-public class Category
+public class Category : BaseEntity<Guid>, IAuditable
 {
-    public Guid Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string Description { get; set; } = string.Empty;
+	public string Name { get; set; } = string.Empty;
+	public string Description { get; set; } = string.Empty;
+	public DateTime CreatedAt { get; set; }
+	public DateTime UpdatedAt { get; set; }
 }
