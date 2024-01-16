@@ -48,6 +48,7 @@ public class DataContext : DbContext
 				LastName = "Heydarov",
 				Email = "knyazheydariv@gmail.com",
 				Password = "password",
+				Role = Contracts.Role.Values.SuperAdmin
 			}
 			);
 	}
