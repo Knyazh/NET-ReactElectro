@@ -63,6 +63,7 @@ public class DataContext : DbContext
 	public DbSet<Order> Orders { get; set; }
 	public DbSet<Color> Colors{ get; set; }
 	public DbSet<ProductColor> ProductColors { get; set; }
+	public DbSet<RandomPrefixFolder> PrefixFolders { get; set; }
 
 
 
