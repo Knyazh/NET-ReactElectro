@@ -1,0 +1,34 @@
+.main-logo p{
+  font-size: 35px;
+  font-family: bold;
+}
+.navbar-search{
+  border: 1px solid black;
+  border-radius: 20px;
+  contain: content  ;
+}
+
+.navbar-icons{
+  text-align: right;
+}
+
+.navbar-icons nav a{
+  margin-left: 20px;
+}
+
+header{
+  padding: 16px;
+}
+
+.select-categories button{
+  height: 37.45px;
+  width: 59.2px;
+}
+
+.btn-warning{
+  border-radius: 0;
+}
+
+.select-section{
+  align-items:end;
+}
