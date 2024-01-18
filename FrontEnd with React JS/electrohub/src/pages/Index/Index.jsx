@@ -1,9 +1,12 @@
 import React from 'react'
+import Slider from '../../components/Slider/Slider'
 
 const Index = () => {
   return (
     <div>
-      <a href="">HomePage</a>
+ <div>
+      <Slider/>
+    </div>
     </div>
   )
 }

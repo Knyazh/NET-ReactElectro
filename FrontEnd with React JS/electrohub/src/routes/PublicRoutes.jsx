@@ -8,8 +8,8 @@ const PublicRoutes = () => {
   return (
     <Layout>
       <Routes>
-        <Route path='/' element={Index}/>
-        <Route path='/product' element={Product}/>
+        <Route path='/' element={<Index/>}/>
+        <Route path='/product' element={<Product/>}/>
       </Routes>
     </Layout>
   )
