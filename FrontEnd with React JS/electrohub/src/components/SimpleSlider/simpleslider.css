@@ -1,0 +1,23 @@
+.carousel {
+    height: 400px;
+    contain: content;
+    display: flex;
+    align-items: center;
+  }
+  
+  .carousel-item {
+    position: relative;
+    width: 100%; /* Ensure the Carousel items take up the full width */
+  }
+  
+  .carousel-caption {
+    position: absolute;
+    left: 50%;
+    top: 75%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .carousel-item img {
+    object-fit:fill; 
+  }
+  
