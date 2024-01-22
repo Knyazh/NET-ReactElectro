@@ -21,7 +21,9 @@ const Product = () => {
           <div className="col-lg-2 cart-details">
             <Link href="">category</Link>
             <h2> Product Title</h2>
+            <Link>
             <img src={iphone} alt="iphone" />
+            </Link>
             <div className="d-flex align-items-center justify-content-between price-and-add-to-cart">
               <span className="product-cart-price">$ 1,200</span>
               <Link className="add-to-cart-icon" href="">
@@ -39,7 +41,9 @@ const Product = () => {
           <div className="col-lg-2 cart-details">
             <Link href="">category</Link>
             <h2> Product Title</h2>
+            <Link>
             <img src={iphone} alt="iphone" />
+            </Link>
             <div className="d-flex align-items-center justify-content-between price-and-add-to-cart">
               <span className="product-cart-price">$ 1,200</span>
               <Link className="add-to-cart-icon" href="">
@@ -57,7 +61,9 @@ const Product = () => {
           <div className="col-lg-2 cart-details">
             <Link href="">category</Link>
             <h2> Product Title</h2>
+            <Link>
             <img src={iphone} alt="iphone" />
+            </Link>
             <div className="d-flex align-items-center justify-content-between price-and-add-to-cart">
               <span className="product-cart-price">$ 1,200</span>
               <Link className="add-to-cart-icon" href="">
@@ -75,7 +81,9 @@ const Product = () => {
           <div className="col-lg-2 cart-details">
             <Link href="">category</Link>
             <h2> Product Title</h2>
+            <Link>
             <img src={iphone} alt="iphone" />
+            </Link>
             <div className="d-flex align-items-center justify-content-between price-and-add-to-cart">
               <span className="product-cart-price">$ 1,200</span>
               <Link className="add-to-cart-icon" href="">
@@ -93,7 +101,9 @@ const Product = () => {
           <div className="col-lg-2 cart-details">
             <Link href="">category</Link>
             <h2> Product Title</h2>
+            <Link>
             <img src={iphone} alt="iphone" />
+            </Link>
             <div className="d-flex align-items-center justify-content-between price-and-add-to-cart">
               <span className="product-cart-price">$ 1,200</span>
               <Link className="add-to-cart-icon" href="">
@@ -111,7 +121,9 @@ const Product = () => {
           <div className="col-lg-2 cart-details">
             <Link href="">category</Link>
             <h2> Product Title</h2>
+            <Link>
             <img src={iphone} alt="iphone" />
+            </Link>
             <div className="d-flex align-items-center justify-content-between price-and-add-to-cart">
               <span className="product-cart-price">$ 1,200</span>
               <Link className="add-to-cart-icon" href="">
