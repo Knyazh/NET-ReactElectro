@@ -1,0 +1,23 @@
+.feature-list{
+    margin: 23px 0px;
+    border-radius: 8px;
+    border: 1px solid rgb(205, 198, 198);
+}
+
+.features{
+    width: 16.9%;
+    padding-left: 30px;
+    padding-top: 18px;
+    padding-bottom: 13px;
+}
+
+.delivery-logo{
+    height: 35px;
+    width: 35px;
+    color: yellow;
+
+}
+
+.media .logo{
+    padding-right: 10px;
+}
