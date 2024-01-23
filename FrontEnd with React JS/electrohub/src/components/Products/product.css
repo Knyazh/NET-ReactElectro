@@ -12,6 +12,7 @@
     padding: 15px;
     margin-top: 10px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+ 
 }
 
 .cart-details:hover{
@@ -101,3 +102,74 @@ margin-bottom: 8px;
   .cart-details:hover .add-to-cart-icon{
     color: yellow;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+  @keyframes fadeInFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeInFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  
+  .cart-details:nth-child(odd) {
+    animation: fadeInFromLeft 1s ease-in-out;
+  }
+  
+  .cart-details:nth-child(even) {
+    animation: fadeInFromRight 1s ease-in-out;
+  }
+
+
+  @keyframes slideInFromLeft {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  .cart-details:nth-child(odd) {
+    animation: slideInFromLeft 1s ease-in-out;
+  }
+  
+  .cart-details:nth-child(even) {
+    animation: slideInFromRight 1s ease-in-out;
+  } 
+  
+

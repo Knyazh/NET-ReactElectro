@@ -16,7 +16,7 @@ const BestSellers = () => {
     <section className="bestseller-section">
       <div className="container">
         <header className="d-flex justify-content-between">
-          <h2 className="header-nav">Best Sellers</h2>
+          <h2 className="header-nav">Bestsellers</h2>
           <ul className="d-flex">
             <li className="bestseller-ul">
               <Link>Smart Phones & Tablets</Link>
