@@ -54,7 +54,7 @@ const Header = () => {
                   </NavLink>
                 </div>
                 <div className="nav-link" data-title="Account">
-                  <NavLink to="/product">
+                  <NavLink to="/login">
                     <i className="fa-regular fa-user"></i>
                   </NavLink>
                 </div>
