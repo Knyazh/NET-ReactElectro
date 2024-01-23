@@ -42,7 +42,7 @@ const Header = () => {
               </div>
             </div>
             <div className="navbar-icons col-lg-2">
-              <nav>
+              <nav className="d-flex">
                 <div className="nav-link" data-title="Compare">
                   <NavLink to="/">
                     <i className="fa-solid fa-code-compare"></i>
@@ -56,6 +56,11 @@ const Header = () => {
                 <div className="nav-link" data-title="Account">
                   <NavLink to="/login">
                     <i className="fa-regular fa-user"></i>
+                  </NavLink>
+                </div>
+                <div className="nav-link" data-title="Register">
+                  <NavLink to="/registration">
+                  <i class="fa-regular fa-address-card"></i>
                   </NavLink>
                 </div>
                 <div className="nav-link" data-title="Cart">
