@@ -61,7 +61,7 @@ const Product = () => {
           <div className="col-lg-2 cart-details">
             <Link href="">category</Link>
             <h2> Product Title</h2>
-            <Link>
+            <Link to="/details">
             <img src={iphone} alt="iphone" />
             </Link>
             <div className="d-flex align-items-center justify-content-between price-and-add-to-cart">

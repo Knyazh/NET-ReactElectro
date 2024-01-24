@@ -10,7 +10,7 @@ import iphone from '../../images/Carousel/iphone-cart.jpg';
 
 const CategoriesAndProducts = () => {
   return (
-    <div className="container main-product-div d-flex justify-content-between">
+    <div className="container main-product-div d-flex ">
       <div className="sidebar-wrap col-lg-2">
         <div className="sidebar">
           <aside>
