@@ -1,0 +1,7 @@
+.sidebar{
+    width: 300px;
+    text-align: center;
+    display: block;
+    box-sizing: border-box;
+    padding: 0 15px;
+}

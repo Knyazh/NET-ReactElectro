@@ -11,7 +11,7 @@ const PublicRoutes = () => {
     <Layout>
       <Routes>
         <Route path='/' element={<Index/>}/>
-        <Route path='/product' element={<Product/>}/>
+        <Route path='/products' element={<Product/>}/>
         <Route path='/login' element={<Login/>} />
         <Route path='/registration' element={<Registration/>} />
       </Routes>

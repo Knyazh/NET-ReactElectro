@@ -1,0 +1,7 @@
+aside div {
+    display: flex;
+}
+aside{
+    display: flex;
+    flex-direction: column;
+}
