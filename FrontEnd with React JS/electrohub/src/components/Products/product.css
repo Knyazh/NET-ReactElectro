@@ -23,15 +23,12 @@
     border-bottom: 1px solid rgb(237, 230, 230);
 }
 
-.product-cart img{
+.product-image-container{
+  height: 175px;
+  width: 175px;
+  justify-content: center;
+  }
 
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    margin: auto;
-    padding: 5px;
-}
 
 .cart-details a{
     font-size: small;
@@ -57,6 +54,16 @@ margin-left: 0px;
 margin-right: 10px;
 font-size:xx-large;
 margin-bottom: 8px;
+}
+
+
+
+.add-to-cart-icon{
+  margin-left: 15px;
+ margin-right: 10px;
+ font-size:30px;
+ color: #333E48;
+ border: 0;
 }
 
 
