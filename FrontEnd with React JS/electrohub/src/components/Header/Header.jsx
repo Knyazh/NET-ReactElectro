@@ -65,7 +65,7 @@ const Header = () => {
                   </NavLink>
                 </div>
                 <div className="nav-link" data-title="Cart">
-                  <NavLink to="">
+                  <NavLink to='/cartdetails'>
                     <i className="fa-solid fa-cart-shopping"></i>
                   </NavLink>
                 </div>

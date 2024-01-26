@@ -6,6 +6,7 @@ import Product from '../pages/Product/Product'
 import Login from '../pages/LogIn/Login'
 import Registration from '../pages/Register/Registration'
 import Details  from '../pages/Details/Details'
+import CartDetails from '../pages/CartDetails/CartDetails'
 
 const PublicRoutes = () => {
   return (
@@ -16,6 +17,8 @@ const PublicRoutes = () => {
         <Route path='/login' element={<Login/>} />
         <Route path='/registration' element={<Registration/>} />
         <Route path='/details' element={<Details/>} />
+        <Route path='/cartdetails' element={<CartDetails/>} />
+
       </Routes>
     </Layout>
   )
