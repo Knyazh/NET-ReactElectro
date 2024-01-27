@@ -1,15 +1,16 @@
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import PublicRoutes from './routes/PublicRoutes';
-import { ProductProvider } from './context/ProductContext';
+import { ShopContextProvider } from './context/shop-context';
 
 function App() {
   return (
     <div  className='App'>
       <BrowserRouter>
-      <ProductProvider>
+      <ShopContextProvider>
+
          <PublicRoutes/>
-      </ProductProvider>
+      </ShopContextProvider>
       </BrowserRouter>
     </div>
   );

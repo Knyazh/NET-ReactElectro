@@ -58,7 +58,6 @@ const PDetails = () => {
       </div>
   
     </div>
-  
   </div>
   )
 }
