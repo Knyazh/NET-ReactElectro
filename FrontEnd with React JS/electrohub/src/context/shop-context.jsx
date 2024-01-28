@@ -6,10 +6,14 @@ export const ShopContext = createContext(null);
 
 
 export const ShopContextProvider = (props) => {
+
+  
    const [products, setProducts] = useState([]);
 
+
+ 
+
   useEffect(() => {
-    
  const getProducts = async () => {
    await axios
      .get("https://fakestoreapi.com/products?limit=6")

@@ -16,7 +16,7 @@ const PublicRoutes = () => {
         <Route path='/products' element={<Product/>}/>
         <Route path='/login' element={<Login/>} />
         <Route path='/registration' element={<Registration/>} />
-        <Route path='/details' element={<Details/>} />
+        <Route path='/details/:id' element={<Details/>} />
         <Route path='/cartdetails' element={<CartDetails/>} />
 
       </Routes>

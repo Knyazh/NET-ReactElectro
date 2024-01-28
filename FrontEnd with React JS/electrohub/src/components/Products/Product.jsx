@@ -20,7 +20,7 @@ const Product = (props) => {
     {title.length > 15 ? `${title.substring(0, 15)}...` : title}
     </h2>
     <div className="product-image-container d-flex">
-      <Link>
+      <Link to={`/details/${id}`}>
         <img
           className="product-image"
           src={image}
