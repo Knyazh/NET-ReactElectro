@@ -13,7 +13,7 @@ const CardDetails = (props) => {
         <button type="button" className="btn btn-danger"  onClick={() => removeFromCart(id)} >x</button>
       </td>
       <td>
-        <img src={image} style={{ width: "92px", height: "92px" }} />
+        <img src={image} alt="ssa" style={{ width: "92px", height: "92px" }} />
       </td>
       <td>{title}</td>
       <td>${price}</td>

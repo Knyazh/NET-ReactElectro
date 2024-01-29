@@ -18,7 +18,6 @@ const PublicRoutes = () => {
         <Route path='/registration' element={<Registration/>} />
         <Route path='/details/:id' element={<Details/>} />
         <Route path='/cartdetails' element={<CartDetails/>} />
-
       </Routes>
     </Layout>
   )

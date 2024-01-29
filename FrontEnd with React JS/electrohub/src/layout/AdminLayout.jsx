@@ -1,8 +1,14 @@
 import React from 'react'
+import AdminSideBar from '../admin/components/Sidebar/AdminSideBar'
 
-const AdminLayout = () => {
+const AdminLayout = (props) => {
   return (
-    <div>AdminLayout</div>
+       <div>
+        <AdminSideBar/>
+        <main>
+            {props.children}
+        </main>
+    </div>
   )
 }
 

@@ -16,6 +16,7 @@ import { ShopContext } from '../../context/shop-context';
 
 
 const Index = (props) => {
+  
   const { products} = useContext(ShopContext);
   
 
