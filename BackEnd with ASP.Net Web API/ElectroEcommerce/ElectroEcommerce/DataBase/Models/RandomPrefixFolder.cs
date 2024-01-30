@@ -1,6 +1,9 @@
-﻿namespace ElectroEcommerce.DataBase.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ElectroEcommerce.DataBase.Models;
 
 public class RandomPrefixFolder
 {
-	public string randomPrefix { get; set; } =string.Empty;
+	[Key]
+	public string RandomPrefix { get; set; } =string.Empty;
 }

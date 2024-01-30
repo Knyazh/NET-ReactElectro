@@ -10,14 +10,24 @@ public class Program
 		var builder = WebApplication.CreateBuilder(args);
 
 
-
 		builder.Services.AddControllers();
 		builder.Services.AddDbContext<DataContext>(options =>
 		{
 			options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
+		})
+
+		.AddEndpointsApiExplorer()
+		.AddSwaggerGen()
+		.AddCors(options =>
+		{
+			options.AddPolicy("AllowAll",
+				builder =>
+				{
+					builder.AllowAnyOrigin()
+					.AllowAnyMethod()
+					.AllowAnyHeader();
+				});
 		});
-		builder.Services.AddEndpointsApiExplorer();
-		builder.Services.AddSwaggerGen();
 
 		var app = builder.Build();
 
@@ -27,6 +37,8 @@ public class Program
 			app.UseSwaggerUI();
 		}
 
+		app.UseCors("AllowAll");
+		app.UseHttpsRedirection();
 		app.UseHttpsRedirection();
 
 		app.UseAuthorization();

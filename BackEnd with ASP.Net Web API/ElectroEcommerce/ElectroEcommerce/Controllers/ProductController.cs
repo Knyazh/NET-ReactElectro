@@ -18,7 +18,7 @@ public class ProductController : ControllerBase
 
 
 	[HttpPost("add-product")]
-	public async Task<ActionResult<List<ProductModel>>> Add(ProductModel product)
+	public async Task<ActionResult<List<ProductModel>>> Add( [FromForm] ProductModel product)
 	{
 		product.Id = Guid.NewGuid();
 		_dataContext.Products.Add(product);
@@ -33,7 +33,7 @@ public class ProductController : ControllerBase
 	}
 
 	[HttpGet("get-by-id/{id}")]
-	public async Task<ActionResult<ProductModel>> Get(Guid id)
+	public async Task<ActionResult<ProductModel>> Get([FromForm] Guid id)
 	{
 		var product = await _dataContext.Products.FindAsync(id);
 
@@ -43,7 +43,7 @@ public class ProductController : ControllerBase
 	}
 
 	[HttpGet("get-procuct-by-name/{name}")]
-	public async Task<ActionResult<IEnumerable<ProductModel>>> Get(string name)
+	public async Task<ActionResult<IEnumerable<ProductModel>>> Get( string name)
 	{
 		var products = await _dataContext.Products.
 			Where(p=> p.Name.ToLower()== name.ToLower()).
@@ -54,7 +54,7 @@ public class ProductController : ControllerBase
 	}
 
 	[HttpPut("update-product-id{id}")]
-	public async Task<ActionResult<List<ProductModel>>> Update(ProductModel request,Guid id)
+	public async Task<ActionResult<List<ProductModel>>> Update([FromForm] ProductModel request,[FromForm] Guid id)
 	{
 		var product = await _dataContext.Products.FindAsync(id);
 		if (product == null) { return NotFound("Product not found"); }
@@ -70,7 +70,7 @@ public class ProductController : ControllerBase
 	}
 
 	[HttpDelete("remove-product-id/{id}")]
-	public async Task<ActionResult<ProductModel>> Delete(Guid id)
+	public async Task<ActionResult<ProductModel>> Delete([FromForm] Guid id)
 	{
 		var product = await _dataContext.Products.FindAsync(id); 
 		if (product == null) { return NotFound("Product not found"); }

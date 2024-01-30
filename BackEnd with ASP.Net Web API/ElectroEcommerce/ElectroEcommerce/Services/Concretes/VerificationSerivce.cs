@@ -21,10 +21,10 @@ public class VerificationSerivce : IVerificationService
 			decimal randomNumer = _random.Next(10000, 10000000);
 			randomPrefix = prefix + randomNumer;
 		}
-		while (_dataContext.PrefixFolders.Any(p => p.randomPrefix.Equals(randomPrefix)));
+		while (_dataContext.PrefixFolders.Any(p => p.RandomPrefix.Equals(randomPrefix)));
 		var prefixFolder = new RandomPrefixFolder
 		{
-			randomPrefix = randomPrefix
+			RandomPrefix = randomPrefix
 		};
 		_dataContext.PrefixFolders.Add(prefixFolder);
 		return randomPrefix;

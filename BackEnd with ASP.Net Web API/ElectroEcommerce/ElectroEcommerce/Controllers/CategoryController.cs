@@ -22,8 +22,15 @@ public class CategoryController : ControllerBase
 		return Ok(await _dataContext.Categories.ToListAsync());
 	}
 
+
+	[HttpGet("get-limited")]
+	public async Task<ActionResult<List<Category>>> GetLimited( int limit)
+	{
+		return Ok(await _dataContext.Categories.Take(limit).ToListAsync());
+	}
+
 	[HttpPost("add-category")]
-	public async Task<ActionResult<List<Category>>> Add(Category category)
+	public async Task<ActionResult<List<Category>>> Add( [FromForm]Category category)
 	{
 		category.Id = Guid.NewGuid();
 		await _dataContext.Categories.AddAsync(category);
@@ -40,16 +47,35 @@ public class CategoryController : ControllerBase
 			return Ok(category);
 	}
 
-	[HttpPut("update-categroy/{id}")]
-	public async Task<ActionResult<List<Category>>> Update(Category request,Guid id)
+	//[HttpPut("update-categroy/{id}")]
+	//public async Task<ActionResult<List<Category>>> Update(Category request,Guid id)
+	//{
+	//	var category = await _dataContext.Categories.FindAsync(id);
+	//	if (category == null) { return NotFound("Category not exist"); }
+	//	category.Name = request.Name;
+	//	category.Description = request.Description;
+	//	await _dataContext.SaveChangesAsync();
+	//	return Ok(category);
+	//}
+
+
+	[HttpPut("update-category/{id}")]
+	public async Task<ActionResult<Category>> Update( [FromForm] Guid id, [FromForm] Category request)
 	{
 		var category = await _dataContext.Categories.FindAsync(id);
-		if (category == null) { return NotFound("Category not exist"); }
+		if (category == null)
+		{
+			return NotFound("Category not found");
+		}
+
 		category.Name = request.Name;
 		category.Description = request.Description;
+
 		await _dataContext.SaveChangesAsync();
+
 		return Ok(category);
 	}
+
 
 	[HttpDelete("delete-category-id/{id}")]
 	public async Task<ActionResult<List<Category>>> Delete(Guid id)
