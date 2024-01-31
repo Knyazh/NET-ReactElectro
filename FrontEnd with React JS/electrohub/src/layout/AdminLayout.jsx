@@ -1,15 +1,15 @@
-import React from 'react'
-import AdminSideBar from '../admin/components/Sidebar/AdminSideBar'
+// AdminLayout.js
+import React from 'react';
+import AdminSideBar from '../admin/components/Sidebar/AdminSideBar';
 
 const AdminLayout = (props) => {
   return (
-       <div>
-        <AdminSideBar/>
-        <main>
-            {props.children}
-        </main>
-    </div>
-  )
-}
+    <div>
+      <AdminSideBar />
+      <main style={{ width: '80%', marginLeft: '300px' }}>{props.children}</main>
 
-export default AdminLayout
+    </div>
+  );
+};
+
+export default AdminLayout;

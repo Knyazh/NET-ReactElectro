@@ -84,7 +84,7 @@ const Header = () => {
                   <Link>Smart Phones</Link>
                   <Link>Laptop & Desktops</Link>
                   <Link>Gadgets</Link>
-                  <Link to='/admin\'>Admin</Link>
+                  <Link to='/admin'>Admin</Link>
                   <Link>Cameras & Accessories</Link>
                   <Link>Movie & Games</Link>
                 </ul>

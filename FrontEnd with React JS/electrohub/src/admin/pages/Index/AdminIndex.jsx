@@ -1,11 +1,12 @@
-import React from 'react'
-import './adminIndex.css'
+import React from 'react';
+import './adminIndex.css';
 
 const AdminIndex = () => {
   return (
-    <div>
+    <div className='adminindex'>
+      <div></div>
     </div>
-  )
-}
+  );
+};
 
-export default AdminIndex
+export default AdminIndex;
