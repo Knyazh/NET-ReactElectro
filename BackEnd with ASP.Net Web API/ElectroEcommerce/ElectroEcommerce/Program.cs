@@ -1,4 +1,6 @@
 global using  ElectroEcommerce.DataBase;
+using ElectroEcommerce.Services.Abstracts;
+using ElectroEcommerce.Services.Concretes;
 using Microsoft.EntityFrameworkCore;
 
 namespace  ElectroEcommerce;
@@ -16,6 +18,9 @@ public class Program
 			options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
 		})
 
+		.AddScoped<IEmailService, EmailService>()
+		.AddTransient<IEmailSender, EmailSender>()
+		.AddScoped<ISmsService, SmsService>()
 		.AddEndpointsApiExplorer()
 		.AddSwaggerGen()
 		.AddCors(options =>

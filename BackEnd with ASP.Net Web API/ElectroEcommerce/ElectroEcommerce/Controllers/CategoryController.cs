@@ -1,5 +1,8 @@
-﻿using ElectroEcommerce.DataBase.Models;
+﻿using ElectroEcommerce.DataBase.DTOs.Category;
+using ElectroEcommerce.DataBase.DTOs.Email;
+using ElectroEcommerce.DataBase.Models;
 using ElectroEcommerce.Migrations;
+using ElectroEcommerce.Services.Abstracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,9 +14,17 @@ namespace ElectroEcommerce.Controllers;
 public class CategoryController : ControllerBase
 {
 	private readonly DataContext _dataContext;
-	public CategoryController(DataContext dataContext)
+
+	private readonly IEmailService _emailService;
+
+	private readonly IEmailSender _emailSender;
+	private readonly ISmsService _smsService;
+	public CategoryController(DataContext dataContext, IEmailService emailService = null, IEmailSender emailSender = null, ISmsService smsService = null)
 	{
 		_dataContext = dataContext;
+		_emailService = emailService;
+		_emailSender = emailSender;
+		_smsService = smsService;
 	}
 
 	[HttpGet("get-all")]
@@ -30,11 +41,24 @@ public class CategoryController : ControllerBase
 	}
 
 	[HttpPost("add-category")]
-	public async Task<ActionResult<List<Category>>> Add( [FromForm]Category category)
+	public async Task<ActionResult<Category>> AddCategory(CategoryPostDTO categoryDTO)
 	{
-		category.Id = Guid.NewGuid();
-		await _dataContext.Categories.AddAsync(category);
+		if (!ModelState.IsValid)
+		{
+			return BadRequest(ModelState);
+		}
+
+		var category = new Category
+		{
+			Name = categoryDTO.Name,
+			Description = categoryDTO.Description,
+			CreatedAt = DateTime.UtcNow,
+			UpdatedAt = DateTime.UtcNow
+		};
+
+		await _dataContext.AddAsync(category);
 		await _dataContext.SaveChangesAsync();
+
 		return Ok(category);
 	}
 
@@ -47,20 +71,10 @@ public class CategoryController : ControllerBase
 			return Ok(category);
 	}
 
-	//[HttpPut("update-categroy/{id}")]
-	//public async Task<ActionResult<List<Category>>> Update(Category request,Guid id)
-	//{
-	//	var category = await _dataContext.Categories.FindAsync(id);
-	//	if (category == null) { return NotFound("Category not exist"); }
-	//	category.Name = request.Name;
-	//	category.Description = request.Description;
-	//	await _dataContext.SaveChangesAsync();
-	//	return Ok(category);
-	//}
-
+	
 
 	[HttpPut("update-category/{id}")]
-	public async Task<ActionResult<Category>> Update( [FromForm] Guid id, [FromForm] Category request)
+	public async Task<ActionResult<Category>> Update(  Guid id,  Category request)
 	{
 		var category = await _dataContext.Categories.FindAsync(id);
 		if (category == null)
@@ -85,6 +99,21 @@ public class CategoryController : ControllerBase
 		_dataContext.Remove(category);
 		await _dataContext.SaveChangesAsync();
 		return Ok(category);
+	}
+
+
+	[HttpPost("mail-send")]
+	public IActionResult EmailAdd(EmailDto request)
+	{
+		_emailService.SendEmail(request);
+		return Ok();
+	}
+
+	[HttpPost("sms-send")]
+	public IActionResult SendSms(string number,string sms)
+	{
+		_smsService.SendSMSAsync(number,sms);
+		return Ok();
 	}
 
 
