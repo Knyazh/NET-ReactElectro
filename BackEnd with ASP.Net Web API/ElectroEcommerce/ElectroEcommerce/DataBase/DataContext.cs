@@ -36,11 +36,16 @@ public class DataContext : DbContext
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 
-		modelBuilder.ApplyConfigurationsFromAssembly(typeof (DataContext).Assembly);
+		//modelBuilder.ApplyConfigurationsFromAssembly(typeof (DataContext).Assembly);
+
 
 		base.OnModelCreating(modelBuilder);
+
 		modelBuilder.Entity<User>().HasData(
 
+
+
+		#region Admin Seeding
 			new User
 			{
 				Id = Guid.NewGuid(),
@@ -51,7 +56,9 @@ public class DataContext : DbContext
 				Role = Contracts.Role.Values.SuperAdmin
 			}
 			);
+		#endregion
 	}
+
 
 
 
@@ -64,6 +71,8 @@ public class DataContext : DbContext
 	public DbSet<Color> Colors{ get; set; }
 	public DbSet<ProductColor> ProductColors { get; set; }
 	public DbSet<RandomPrefixFolder> PrefixFolders { get; set; }
+
+	public DbSet<MyOrder> MyOrders { get; set; }
 
 
 

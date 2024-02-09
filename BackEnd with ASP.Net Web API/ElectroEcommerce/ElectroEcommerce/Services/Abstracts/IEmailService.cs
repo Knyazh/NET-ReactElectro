@@ -4,5 +4,6 @@ namespace ElectroEcommerce.Services.Abstracts;
 
 public interface IEmailService
 {
-	void SendEmail(EmailDto request);
+	Task SendEmailAsync(string reciepent, string subject, string body);
+	Task SendEmailAsync(List<string> reciepents, string subject, string body);
 }

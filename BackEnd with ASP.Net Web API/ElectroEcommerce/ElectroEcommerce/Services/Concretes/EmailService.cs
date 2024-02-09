@@ -9,27 +9,71 @@ namespace ElectroEcommerce.Services.Concretes;
 
 public class EmailService : IEmailService
 {
-	private readonly IConfiguration _config;
+	private readonly IConfiguration _configuration;
+	private readonly string _from;
+	private readonly string _password;
+	private readonly string _host;
+	private readonly int _port;
 
-	public EmailService(IConfiguration config)
+	public EmailService(IConfiguration configuration)
 	{
-		_config = config;
+		_configuration = configuration;
+		_from = _configuration.GetValue<string>("MailSettings:EmailAdress");
+		_host = _configuration.GetValue<string>("MailSettings:Host");
+		_port = _configuration.GetValue<int>("MailSettings:Port");
+		_password = _configuration.GetValue<string>("MailSettings:Password");
 	}
 
-	public void SendEmail(EmailDto request)
+	public async Task SendEmailAsync(string reciepent, string subject, string body)
+	{
+		await SendEmailAsync(new List<string> { reciepent }, subject, body);
+	}
+
+	public async Task SendEmailAsync(List<string> reciepents, string subject, string body)
+	{
+		var DTO = new EmailDto(reciepents, subject, body);
+		var email = CreateEmailMessage(DTO);
+
+		await AuthorizeAndSendEmailAsync(email);
+	}
+
+	private MimeMessage CreateEmailMessage(EmailDto DTO)
 	{
 		var email = new MimeMessage();
-		email.From.Add(MailboxAddress.Parse(_config.GetSection("EmailUsername").Value));
-		email.To.Add(MailboxAddress.Parse(request.To));
-		email.Subject = request.Subject;
-		email.Body = new TextPart(TextFormat.Html) { Text = request.Body };
+		email.From.Add(MailboxAddress.Parse(_from));
+		foreach (var reciepent in DTO.Recipients)
+		{
+			email.To.Add(MailboxAddress.Parse(reciepent));
+		}
+		email.Subject = DTO.Subject;
+		email.Body = new TextPart(TextFormat.Html) { Text = DTO.Body };
 
-		using var smtp = new SmtpClient();
-		smtp.Connect(_config.GetSection("EmailHost").Value, 587, SecureSocketOptions.StartTls);
-		smtp.Authenticate(_config.GetSection("EmailUsername").Value, _config.GetSection("EmailPassword").Value);
-		smtp.Send(email);
-		smtp.Disconnect(true);
+		return email;
 	}
 
-	
+	private async Task AuthorizeAndSendEmailAsync(MimeMessage email)
+	{
+		try
+		{
+			using (var smtp = new SmtpClient())
+			{
+				await smtp.ConnectAsync(_host, _port, SecureSocketOptions.StartTls);
+				smtp.AuthenticationMechanisms.Remove("XOAUTH2");
+				await smtp.AuthenticateAsync(_from, _password);
+				await smtp.SendAsync(email);
+				await smtp.DisconnectAsync(true);
+			}
+		}
+		catch (AuthenticationException authException)
+		{
+			Console.WriteLine($"Authentication failed: {authException.Message}");
+		}
+		catch (Exception exception)
+		{
+			Console.WriteLine($"An error occurred while sending email: {exception.Message}");
+		}
+	}
+
+
+
 }

@@ -102,10 +102,10 @@ public class CategoryController : ControllerBase
 	}
 
 
-	[HttpPost("mail-send")]
-	public IActionResult EmailAdd(EmailDto request)
+	[HttpPost]
+	public async Task<IActionResult> Email(string recipient, string subject, string body)
 	{
-		_emailService.SendEmail(request);
+		await _emailService.SendEmailAsync(recipient, subject, body);
 		return Ok();
 	}
 
