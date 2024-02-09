@@ -60,6 +60,11 @@ public class DataContext : DbContext
 			.WithMany(c => c.ProductColors)
 			.HasForeignKey(pc => pc.ColorId);
 
+		modelBuilder.Entity<User>()
+			  .HasOne<ActivationToken>(u => u.ActivationToken)
+			  .WithOne(act => act.User)
+			  .HasForeignKey<ActivationToken>(act => act.UserId);
+
 		#region Admin Seeding
 		modelBuilder.Entity<User>().HasData(
 			new User
@@ -87,6 +92,7 @@ public class DataContext : DbContext
 	public DbSet<Color> Colors{ get; set; }
 	public DbSet<ProductColor> ProductColors { get; set; }
 	public DbSet<RandomPrefixFolder> PrefixFolders { get; set; }
+	public DbSet<ActivationToken> ActivationTokens { get; set; }
 
 
 

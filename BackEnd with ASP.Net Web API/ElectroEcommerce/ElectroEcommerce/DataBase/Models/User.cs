@@ -14,6 +14,7 @@ public class User : BaseEntity<Guid> , IAuditable
 	public DateTime UpdatedAt { get; set; }
     public Role.Values Role { get; set; }
     public List<Order> Orders { get; set; }
+	public ActivationToken ActivationToken { get; set; }
 
 }
 

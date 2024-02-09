@@ -19,10 +19,11 @@ public class Program
 		})
 
 		.AddScoped<IEmailService, EmailService>()
-		.AddTransient<IEmailSender, EmailSender>()
 		.AddScoped<ISmsService, SmsService>()
+		.AddScoped<IActivationService, ActivationService>()
 		.AddEndpointsApiExplorer()
 		.AddSwaggerGen()
+		.AddHttpContextAccessor()
 		.AddCors(options =>
 		{
 			options.AddPolicy("AllowAll",
@@ -44,10 +45,9 @@ public class Program
 
 		app.UseCors("AllowAll");
 		app.UseHttpsRedirection();
-		app.UseHttpsRedirection();
 
 		app.UseAuthorization();
-
+		app.UseAuthentication();
 
 		app.MapControllers();
 
