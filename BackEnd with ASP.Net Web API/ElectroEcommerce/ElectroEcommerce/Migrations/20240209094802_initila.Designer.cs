@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ElectroEcommerce.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240208125106_myorder")]
-    partial class myorder
+    [Migration("20240209094802_initila")]
+    partial class initila
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,7 +67,7 @@ namespace ElectroEcommerce.Migrations
                     b.ToTable("Colors");
                 });
 
-            modelBuilder.Entity("ElectroEcommerce.DataBase.Models.MyOrder", b =>
+            modelBuilder.Entity("ElectroEcommerce.DataBase.Models.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,22 +85,39 @@ namespace ElectroEcommerce.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
-                    b.ToTable("MyOrders");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("ElectroEcommerce.DataBase.Models.ProductColor", b =>
                 {
-                    b.Property<Guid>("ProductId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("ColorId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("ProductId", "ColorId");
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("ColorId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductColors");
                 });
@@ -178,7 +195,7 @@ namespace ElectroEcommerce.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("91ce4556-5c30-47a5-a4aa-0dc8d312e6eb"),
+                            Id = new Guid("55120420-48fd-4b32-8fd3-35a31ece6f8a"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "knyazheydariv@gmail.com",
                             LastName = "Heydarov",
@@ -187,6 +204,17 @@ namespace ElectroEcommerce.Migrations
                             Role = 3,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
+                });
+
+            modelBuilder.Entity("ElectroEcommerce.DataBase.Models.Order", b =>
+                {
+                    b.HasOne("ElectroEcommerce.DataBase.Models.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ElectroEcommerce.DataBase.Models.ProductColor", b =>
@@ -216,6 +244,11 @@ namespace ElectroEcommerce.Migrations
             modelBuilder.Entity("ElectroEcommerce.DataBase.Models.ProductModel", b =>
                 {
                     b.Navigation("ProductColors");
+                });
+
+            modelBuilder.Entity("ElectroEcommerce.DataBase.Models.User", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

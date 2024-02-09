@@ -1,6 +1,8 @@
-﻿namespace ElectroEcommerce.DataBase.Models;
+﻿using ElectroEcommerce.DataBase.Base;
 
-public class ProductColor
+namespace ElectroEcommerce.DataBase.Models;
+
+public class ProductColor : BaseEntity<Guid>, IAuditable
 {
 	public ProductModel Product { get; set; }
 	public Guid ProductId { get; set; }
@@ -8,4 +10,6 @@ public class ProductColor
 
 	public Color Color { get; set; }
 	public Guid ColorId { get; set; }
+	public DateTime CreatedAt { get; set; }
+	public DateTime UpdatedAt { get; set; }
 }

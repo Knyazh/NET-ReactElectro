@@ -1,7 +1,6 @@
 ﻿using ElectroEcommerce.DataBase.DTOs.Category;
 using ElectroEcommerce.DataBase.DTOs.Email;
 using ElectroEcommerce.DataBase.Models;
-using ElectroEcommerce.Migrations;
 using ElectroEcommerce.Services.Abstracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

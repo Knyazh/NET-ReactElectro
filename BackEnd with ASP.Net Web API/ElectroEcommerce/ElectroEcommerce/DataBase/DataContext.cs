@@ -41,11 +41,27 @@ public class DataContext : DbContext
 
 		base.OnModelCreating(modelBuilder);
 
-		modelBuilder.Entity<User>().HasData(
+		modelBuilder.Entity<Order>()
+			.HasOne<User>(o => o.User)
+			.WithMany(u => u.Orders)
+			.HasForeignKey(o => o.UserId);
 
 
+		modelBuilder.Entity<ProductColor>()
+			 .HasKey(pc => new { pc.ProductId, pc.ColorId });
+
+		modelBuilder.Entity<ProductColor>()
+			.HasOne(pc => pc.Product)
+			.WithMany(p => p.ProductColors)
+			.HasForeignKey(pc => pc.ProductId);
+
+		modelBuilder.Entity<ProductColor>()
+			.HasOne(pc => pc.Color)
+			.WithMany(c => c.ProductColors)
+			.HasForeignKey(pc => pc.ColorId);
 
 		#region Admin Seeding
+		modelBuilder.Entity<User>().HasData(
 			new User
 			{
 				Id = Guid.NewGuid(),
@@ -72,7 +88,6 @@ public class DataContext : DbContext
 	public DbSet<ProductColor> ProductColors { get; set; }
 	public DbSet<RandomPrefixFolder> PrefixFolders { get; set; }
 
-	public DbSet<MyOrder> MyOrders { get; set; }
 
 
 

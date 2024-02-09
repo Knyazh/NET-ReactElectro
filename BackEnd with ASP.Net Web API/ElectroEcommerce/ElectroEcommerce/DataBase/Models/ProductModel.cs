@@ -12,5 +12,5 @@ public class ProductModel : BaseEntity<Guid>, IAuditable
 	public DateTime CreatedAt { get; set; }
 	public DateTime UpdatedAt { get; set; }
 
-	public List<ProductColor> ProductColors { get; set; }
+    public List<ProductColor> ProductColors { get; set; }
 }
