@@ -51,7 +51,7 @@ namespace ElectroEcommerce.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("ActivationTokens");
+                    b.ToTable("ActivationTokens", (string)null);
                 });
 
             modelBuilder.Entity("ElectroEcommerce.DataBase.Models.Category", b =>
@@ -74,7 +74,7 @@ namespace ElectroEcommerce.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("ElectroEcommerce.DataBase.Models.Color", b =>
@@ -94,7 +94,7 @@ namespace ElectroEcommerce.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colors");
+                    b.ToTable("Colors", (string)null);
                 });
 
             modelBuilder.Entity("ElectroEcommerce.DataBase.Models.Order", b =>
@@ -122,7 +122,7 @@ namespace ElectroEcommerce.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("ElectroEcommerce.DataBase.Models.ProductColor", b =>
@@ -146,7 +146,7 @@ namespace ElectroEcommerce.Migrations
 
                     b.HasIndex("ColorId");
 
-                    b.ToTable("ProductColors");
+                    b.ToTable("ProductColors", (string)null);
                 });
 
             modelBuilder.Entity("ElectroEcommerce.DataBase.Models.ProductModel", b =>
@@ -175,7 +175,7 @@ namespace ElectroEcommerce.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("ElectroEcommerce.DataBase.Models.RandomPrefixFolder", b =>
@@ -185,7 +185,7 @@ namespace ElectroEcommerce.Migrations
 
                     b.HasKey("RandomPrefix");
 
-                    b.ToTable("PrefixFolders");
+                    b.ToTable("PrefixFolders", (string)null);
                 });
 
             modelBuilder.Entity("ElectroEcommerce.DataBase.Models.User", b =>
@@ -217,7 +217,7 @@ namespace ElectroEcommerce.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new
