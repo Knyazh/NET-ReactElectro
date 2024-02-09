@@ -13,17 +13,17 @@ public class Program
 
 
 		builder.Services.AddControllers();
+		builder.Services.AddLogging();
 		builder.Services.AddDbContext<DataContext>(options =>
 		{
 			options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
 		})
 
+		//.AddScoped<IActivationService, ActivationService>()
 		.AddScoped<IEmailService, EmailService>()
 		.AddScoped<ISmsService, SmsService>()
-		.AddScoped<IActivationService, ActivationService>()
 		.AddEndpointsApiExplorer()
 		.AddSwaggerGen()
-		.AddHttpContextAccessor()
 		.AddCors(options =>
 		{
 			options.AddPolicy("AllowAll",
@@ -45,9 +45,10 @@ public class Program
 
 		app.UseCors("AllowAll");
 		app.UseHttpsRedirection();
+		app.UseHttpsRedirection();
 
 		app.UseAuthorization();
-		app.UseAuthentication();
+
 
 		app.MapControllers();
 
