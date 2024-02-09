@@ -70,8 +70,9 @@ public class DataContext : DbContext
 				Name = "Knyaz",
 				LastName = "Heydarov",
 				Email = "knyazheydariv@gmail.com",
-				Password = "password",
-				Role = Contracts.Role.Values.SuperAdmin
+				Password = "Knyaz123.",
+				Role = Contracts.Role.Values.SuperAdmin,
+				IsAdmin = true
 			}
 			);
 		#endregion

@@ -30,11 +30,16 @@ public class Program
 			options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
 		})
 
+		.AddScoped<IFileService, FileService>()
 		.AddScoped<IActivationService, ActivationService>()
 		.AddScoped<IEmailService, EmailService>()
 		.AddScoped<ISmsService, SmsService>()
+		.AddScoped<IVerificationService, VerificationSerivce>()
+		.AddScoped<IUserService, UserService>()
+		.AddScoped<INotificationService, NotificationService>()
 		.AddEndpointsApiExplorer()
 		.AddSwaggerGen()
+		.AddHttpContextAccessor()
 		.AddCors(options =>
 		{
 			options.AddPolicy("AllowAll",

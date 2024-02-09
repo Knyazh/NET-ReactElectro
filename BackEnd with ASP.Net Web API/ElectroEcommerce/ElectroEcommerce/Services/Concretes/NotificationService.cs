@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ElectroEcommerce.Services.Concretes;
 
-public class NotificationService
+public class NotificationService : INotificationService
 {
 	private readonly ISmsService _smsService;
 	private readonly IEmailService _emailService;

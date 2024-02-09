@@ -1,10 +1,11 @@
 ﻿using ElectroEcommerce.Contracts;
 using ElectroEcommerce.DataBase.Models;
+using ElectroEcommerce.Services.Abstracts;
 using System.Security.Claims;
 
 namespace ElectroEcommerce.Services.Concretes;
 
-public class UserService
+public class UserService : IUserService
 {
 	private readonly IHttpContextAccessor _httpContextAccessor;
 	private readonly DataContext _dataContext;

@@ -3,6 +3,7 @@ using System;
 using ElectroEcommerce.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ElectroEcommerce.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240209142713_DtosandSomeChanges")]
+    partial class DtosandSomeChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,15 +242,15 @@ namespace ElectroEcommerce.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0ba19a19-4f39-4622-833c-0f306d8d64c2"),
+                            Id = new Guid("fbcefecf-7161-4048-8d6d-da2b4e114b66"),
                             ApplicationPassword = "",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "knyazheydariv@gmail.com",
-                            IsAdmin = true,
+                            IsAdmin = false,
                             IsComfirmed = false,
                             LastName = "Heydarov",
                             Name = "Knyaz",
-                            Password = "Knyaz123.",
+                            Password = "password",
                             PhoneNumber = "",
                             PhysicalImageUrl = "",
                             Role = 3,

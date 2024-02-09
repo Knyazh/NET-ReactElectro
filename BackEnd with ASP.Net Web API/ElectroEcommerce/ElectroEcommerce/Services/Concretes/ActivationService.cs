@@ -12,12 +12,12 @@ public class ActivationService : IActivationService
 {
 	private readonly string _host;	
 	private readonly IConfiguration _configuration;
-	private readonly EmailService _emailService;
+	private readonly IEmailService _emailService;
 
-	public ActivationService(string host, IConfiguration configuration, EmailService emailService)
+	public ActivationService(IConfiguration configuration, IEmailService emailService)
 	{
-		_host = _configuration.GetValue<string>("AppSettings:Host");
 		_configuration = configuration;
+		_host = _configuration.GetValue<string>("AppSettings:Host");
 		_emailService = emailService;
 	}
 

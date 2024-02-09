@@ -8,12 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ElectroEcommerce.Controllers;
 
-public class AuthenticationController
-{
 	[ApiController]
 	[Route("api/v1/users")]
-	public class UserController : ControllerBase
-	{
+public class AuthenticationController : ControllerBase
+{
+	
 		private readonly DataContext _dataContext;
 		private readonly IVerificationService _verificationService;
 		private readonly IFileService _fileService;
@@ -21,7 +20,7 @@ public class AuthenticationController
 		private readonly INotificationService _notificationService;
 		private readonly IUserService _user_Service;
 
-		public UserController(DataContext dataContext,
+		public AuthenticationController(DataContext dataContext,
 			IVerificationService verificationService,
 			IFileService fileService,
 			IActivationService activationSerive,
@@ -37,6 +36,9 @@ public class AuthenticationController
 		}
 
 		[HttpPost("auth/register")]
+		[ProducesResponseType(StatusCodes.Status201Created)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[Consumes("multipart/form-data")]
 		public async Task<IActionResult> Register([FromForm] UserRegisterDto userRegisterDto)
 		{
 			if (ModelState.IsValid)
@@ -104,7 +106,7 @@ public class AuthenticationController
 					await transaction.CommitAsync();
 
 
-					return Ok();
+					return Ok(user);
 
 				}
 				catch (Exception ex)
@@ -116,5 +118,5 @@ public class AuthenticationController
 
 
 		}
-	}
+	
 }
