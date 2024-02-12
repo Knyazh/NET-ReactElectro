@@ -91,6 +91,7 @@ public class DataContext : DbContext
 	public DbSet<ProductColor> ProductColors { get; set; }
 	public DbSet<RandomPrefixFolder> PrefixFolders { get; set; }
 	public DbSet<ActivationToken> ActivationTokens { get; set; }
+	public DbSet<Email> Emails { get; set; }
 
 
 

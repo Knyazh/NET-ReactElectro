@@ -15,6 +15,8 @@ public class User : BaseEntity<Guid> , IAuditable
     public string PhysicalImageUrl {  get; set; } = string.Empty;
     public bool IsComfirmed { get; set; } = false;
     public bool IsAdmin { get; set; } = false;
+
+	public DateTime ConfirmedDate { get; set; }
 	public string ApplicationPassword { get; set; } = string.Empty;
 	public DateTime CreatedAt { get ; set ; }
 	public DateTime UpdatedAt { get; set; }

@@ -5,6 +5,12 @@ using ElectroEcommerce.Errors;
 using ElectroEcommerce.Services.Abstracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using ElectroEcommerce.CustomEx;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 namespace ElectroEcommerce.Controllers;
 
@@ -41,7 +47,7 @@ public class AuthenticationController : ControllerBase
 		[Consumes("multipart/form-data")]
 		public async Task<IActionResult> Register([FromForm] UserRegisterDto userRegisterDto)
 		{
-			if (ModelState.IsValid)
+			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 
@@ -75,7 +81,7 @@ public class AuthenticationController : ControllerBase
 				UserPrefix = _verificationService.RandomFolderPrefixGenerator(Prefix.USER)
 			};
 
-			if(userRegisterDto.File != null)
+			if(userRegisterDto.File is not null)
 			{
 				user.PhysicalImageUrl= await _fileService.UploadAsync(CustomUploadDirectories.Users, userRegisterDto.File,user.UserPrefix);
 			}
@@ -92,7 +98,7 @@ public class AuthenticationController : ControllerBase
 					var activationToken = await _activationSerive
 						.GenerateAndSendURL(user, Guid.NewGuid().ToString());
 
-					Dictionary<string, string> OldAndNewValues = new Dictionary<string, string>
+					Dictionary<string, string> OldAndNewValues = new()
 					{
 						{ "{email}", user.Email },
 						{ "{surname}", user.LastName },
@@ -105,10 +111,15 @@ public class AuthenticationController : ControllerBase
 
 					await transaction.CommitAsync();
 
+				var jsonOptions = new JsonSerializerOptions
+				{
+					ReferenceHandler = ReferenceHandler.Preserve
+				};
 
-					return Ok(user);
+				var URL = "https://localhost:7010/api/v1/users/details" + user.Id;
+				return Created(URL, JsonSerializer.Serialize(user, jsonOptions));
 
-				}
+			}
 				catch (Exception ex)
 				{
 					await transaction.RollbackAsync();
@@ -118,5 +129,133 @@ public class AuthenticationController : ControllerBase
 
 
 		}
-	
+
+	[HttpGet("authentication/verify")]
+	public async Task<IActionResult> Verify([FromQuery(Name = "Id")] Guid Id, [FromQuery(Name = "Token")] string Token)
+	{
+		try
+		{
+			var token = await _dataContext.ActivationTokens.SingleOrDefaultAsync(token => token.UserId.Equals(Id) && token.UniqueActivationToken.Equals(Token));
+
+			var user = await _dataContext.Users.SingleOrDefaultAsync(user => user.Id.Equals(Id));
+
+
+			if (user is null || token is null)
+			{
+				throw new ActivationException();
+			}
+
+			if (token.IsUsed is true && user.IsComfirmed is true)
+			{
+				await _notificationService
+					.PrepareAndSendEmailNotifcation(user, EmailTemplate.Subject.Activation_Email,
+					EmailTemplate.Body.Exist_Account_Email);
+				throw new ActivationException();
+			}
+
+			if (token.ExpireDate < DateTime.UtcNow)
+			{
+				await _notificationService
+					.PrepareAndSendEmailNotifcation(user,
+					EmailTemplate.Subject.Expired_Token,
+					EmailTemplate.Body.Expired_Token);
+				_dataContext.ActivationTokens.Remove(token);
+				await _dataContext.SaveChangesAsync();
+				throw new ActivationException();
+			}
+
+
+			user.IsComfirmed = true;
+			user.ApplicationPassword = _verificationService.GenerateAppPassword();
+			token.IsUsed = true;
+			token.LastUpdatedAt = DateTime.UtcNow;
+			user.UpdatedAt = DateTime.UtcNow;
+			user.ConfirmedDate = DateTime.UtcNow;
+
+
+			Dictionary<string, string> data = new Dictionary<string, string>();
+			data.Add("{Name}", user.Name);
+			data.Add("{Surname}", user.LastName);
+			data.Add("{app_password}", user.ApplicationPassword);
+
+			var email = await _notificationService
+				.PrepareAndSendEmailNotifcation(data,
+				user, EmailTemplate.Subject.Success_Activation,
+				EmailTemplate.Body.Activation_Email);
+
+			await _notificationService
+				.PrepareAndSendSMSNotifcation(data, user.PhoneNumber,
+				EmailTemplate.Body.Activation_Email);
+
+			_dataContext.Emails.Add(email);
+			_dataContext.Update(user);
+			_dataContext.Update(token);
+			await _dataContext.SaveChangesAsync();
+
+		}
+		catch (Exception ex)
+		{
+			throw new ActivationException("Activation user field", ex);
+		}
+
+		return Ok();
+	}
+
+
+	[HttpPost("auth/login")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public async Task<IActionResult> Login([FromForm] UserLogInDto DTO)
+	{
+
+		if (!ModelState.IsValid)
+			return BadRequest(ModelState);
+
+		else if (!string.IsNullOrEmpty(DTO.Email))
+		{
+			var result = await _dataContext.Users.SingleOrDefaultAsync(u => u.Email.Equals(DTO.Email));
+			ModelState.Clear();
+			ModelState.AddModelError("Email", "Email not found!");
+			if (result is null) return BadRequest(ModelState);
+		}
+
+		var password = _verificationService.HashPassword(DTO.Password);
+
+		var user = await _dataContext.Users.SingleOrDefaultAsync(u => u.Password.Equals(password));
+		if (user is null)
+		{
+			ModelState.Clear();
+			ModelState.AddModelError("Password", "The password you entered is incorrect, please try again!");
+			return BadRequest(ModelState);
+		}
+
+		if (!user.IsComfirmed)
+		{
+			ModelState.Clear();
+			ModelState.AddModelError("Login-Error", "Sorry dear user, your account has not been approved!");
+			return BadRequest(ModelState);
+		}
+
+		var claims = new List<Claim>
+			{
+				 new Claim("Id", user.Id.ToString()),
+			};
+
+		claims.AddRange(_user_Service.GetClaimsAccordingToRole(user));
+
+		var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+		var claimsPricipal = new ClaimsPrincipal(claimsIdentity);
+
+		await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPricipal);
+
+		return Ok(user);
+	}
+
+	[HttpGet("auth/logout")]
+	public async Task<IActionResult> Logout()
+	{
+		await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+		return NoContent();
+	}
 }

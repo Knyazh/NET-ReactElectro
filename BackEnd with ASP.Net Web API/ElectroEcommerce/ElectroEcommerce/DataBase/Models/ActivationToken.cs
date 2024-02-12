@@ -11,6 +11,7 @@ public class ActivationToken : BaseEntity<Guid> , IAuditable
 	[ForeignKey("User")]
 	public Guid UserId { get; set; }
 	public User User { get; set; }
+	public DateTime ExpireDate { get; set; }
 	public DateTime CreatedAt { get; set; }
 	public DateTime UpdatedAt { get ; set ; }
 }

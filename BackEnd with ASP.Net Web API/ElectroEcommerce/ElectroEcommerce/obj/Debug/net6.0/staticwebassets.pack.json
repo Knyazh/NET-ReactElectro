@@ -1,0 +1,49 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\asus\\Desktop\\NET-ReactElectro\\BackEnd with ASP.Net Web API\\ElectroEcommerce\\ElectroEcommerce\\wwwroot\\Upload\\Images\\Users\\USR1865390\\Users-8e0c8690-530a-4270-af26-a69221ee7bef..jpg",
+      "PackagePath": "staticwebassets\\Upload\\Images\\Users\\USR1865390\\Users-8e0c8690-530a-4270-af26-a69221ee7bef..jpg"
+    },
+    {
+      "Id": "C:\\Users\\asus\\Desktop\\NET-ReactElectro\\BackEnd with ASP.Net Web API\\ElectroEcommerce\\ElectroEcommerce\\wwwroot\\Upload\\Images\\Users\\USR5127476\\Users-f86eca7b-df99-477a-b9bb-74e2ca65005b..jpg",
+      "PackagePath": "staticwebassets\\Upload\\Images\\Users\\USR5127476\\Users-f86eca7b-df99-477a-b9bb-74e2ca65005b..jpg"
+    },
+    {
+      "Id": "C:\\Users\\asus\\Desktop\\NET-ReactElectro\\BackEnd with ASP.Net Web API\\ElectroEcommerce\\ElectroEcommerce\\wwwroot\\Upload\\Images\\Users\\USR6176376\\Users-4067728b-b8b6-453c-8436-057b065dc4f7..jpg",
+      "PackagePath": "staticwebassets\\Upload\\Images\\Users\\USR6176376\\Users-4067728b-b8b6-453c-8436-057b065dc4f7..jpg"
+    },
+    {
+      "Id": "C:\\Users\\asus\\Desktop\\NET-ReactElectro\\BackEnd with ASP.Net Web API\\ElectroEcommerce\\ElectroEcommerce\\wwwroot\\Upload\\Images\\Users\\USR6543921\\Users-b5ab5886-74e1-4699-8e43-ff92024997a9..jpg",
+      "PackagePath": "staticwebassets\\Upload\\Images\\Users\\USR6543921\\Users-b5ab5886-74e1-4699-8e43-ff92024997a9..jpg"
+    },
+    {
+      "Id": "C:\\Users\\asus\\Desktop\\NET-ReactElectro\\BackEnd with ASP.Net Web API\\ElectroEcommerce\\ElectroEcommerce\\wwwroot\\Upload\\Images\\Users\\USR7867621\\Users-876bd283-8e97-4cf7-aaf6-c5682fd0fc75..jpg",
+      "PackagePath": "staticwebassets\\Upload\\Images\\Users\\USR7867621\\Users-876bd283-8e97-4cf7-aaf6-c5682fd0fc75..jpg"
+    },
+    {
+      "Id": "C:\\Users\\asus\\Desktop\\NET-ReactElectro\\BackEnd with ASP.Net Web API\\ElectroEcommerce\\ElectroEcommerce\\wwwroot\\Upload\\Images\\Users\\USR9069419\\Users-e93a0497-96ba-4de4-ad37-d864dc562a47..jpg",
+      "PackagePath": "staticwebassets\\Upload\\Images\\Users\\USR9069419\\Users-e93a0497-96ba-4de4-ad37-d864dc562a47..jpg"
+    },
+    {
+      "Id": "C:\\Users\\asus\\Desktop\\NET-ReactElectro\\BackEnd with ASP.Net Web API\\ElectroEcommerce\\ElectroEcommerce\\wwwroot\\Upload\\Images\\Users\\USR9085684\\Users-d278849e-4378-46be-9be9-e1ad4654dd5d..jpg",
+      "PackagePath": "staticwebassets\\Upload\\Images\\Users\\USR9085684\\Users-d278849e-4378-46be-9be9-e1ad4654dd5d..jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.ElectroEcommerce.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.ElectroEcommerce.props",
+      "PackagePath": "build\\ElectroEcommerce.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.ElectroEcommerce.props",
+      "PackagePath": "buildMultiTargeting\\ElectroEcommerce.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.ElectroEcommerce.props",
+      "PackagePath": "buildTransitive\\ElectroEcommerce.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

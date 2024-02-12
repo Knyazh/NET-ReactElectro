@@ -51,3 +51,4 @@ C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcomm
 C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcommerce\ElectroEcommerce\bin\Debug\net6.0\Infobip.Api.Client.dll
 C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcommerce\ElectroEcommerce\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcommerce\ElectroEcommerce\bin\Debug\net6.0\Polly.dll
+C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcommerce\ElectroEcommerce\bin\Debug\net6.0\ElectroEcommerce.staticwebassets.runtime.json

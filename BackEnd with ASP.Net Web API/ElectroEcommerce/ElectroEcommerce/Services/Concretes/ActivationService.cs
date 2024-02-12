@@ -45,8 +45,8 @@ public class ActivationService : IActivationService
 		ActivationToken activationToken1 = new()
 		{
 			CreatedAt = DateTime.UtcNow,
-			LastUpdatedAt = DateTime.UtcNow,
 			UpdatedAt = DateTime.UtcNow,
+			ExpireDate = DateTime.UtcNow.AddHours(3),
 			UniqueActivationToken = activationToken,
 			UserId = user.Id
 		};
