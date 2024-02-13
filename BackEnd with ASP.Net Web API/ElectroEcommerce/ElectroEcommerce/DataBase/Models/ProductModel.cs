@@ -9,6 +9,12 @@ public class ProductModel : BaseEntity<Guid>, IAuditable
     public decimal Price { get; set; } = 0;
 
     public decimal Brand { get; set; } = 0;
+
+    public decimal Amount { get; set; }
+
+    public string PyshicalImageName { get; set; }
+    public string ProductPrefix { get; set; }
+
 	public DateTime CreatedAt { get; set; }
 	public DateTime UpdatedAt { get; set; }
 

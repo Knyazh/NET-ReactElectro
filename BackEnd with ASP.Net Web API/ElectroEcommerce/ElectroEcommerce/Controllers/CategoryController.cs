@@ -40,6 +40,7 @@ public class CategoryController : ControllerBase
 	}
 
 	[HttpPost("add-category")]
+
 	public async Task<ActionResult<Category>> AddCategory(CategoryPostDTO categoryDTO)
 	{
 		if (!ModelState.IsValid)

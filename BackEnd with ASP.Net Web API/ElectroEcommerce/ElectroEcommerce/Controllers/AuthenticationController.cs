@@ -130,7 +130,7 @@ public class AuthenticationController : ControllerBase
 
 		}
 
-	[HttpGet("authentication/verify")]
+	[HttpGet("auth/verify")]
 	public async Task<IActionResult> Verify([FromQuery(Name = "Id")] Guid Id, [FromQuery(Name = "Token")] string Token)
 	{
 		try
@@ -171,7 +171,7 @@ public class AuthenticationController : ControllerBase
 			token.LastUpdatedAt = DateTime.UtcNow;
 			user.UpdatedAt = DateTime.UtcNow;
 			user.ConfirmedDate = DateTime.UtcNow;
-
+			
 
 			Dictionary<string, string> data = new Dictionary<string, string>();
 			data.Add("{Name}", user.Name);

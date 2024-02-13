@@ -1,81 +1,98 @@
-﻿using ElectroEcommerce.DataBase;
-using ElectroEcommerce.DataBase.Models;
-using Microsoft.AspNetCore.Http;
+﻿using ElectroEcommerce.DataBase.Models;
+using ElectroEcommerce.DataBase;
 using Microsoft.AspNetCore.Mvc;
+using ElectroEcommerce.Services.Abstracts;
 using Microsoft.EntityFrameworkCore;
+using ElectroEcommerce.DataBase.DTOs.Category;
+using ElectroEcommerce.DataBase.DTOs.Product;
+using ElectroEcommerce.Contracts;
 
-namespace ElectroEcommerce.Controllers;
-
-[Route("api/v1/product")]
-[ApiController]
-public class ProductController : ControllerBase
+namespace ElectroEcommerce.Controllers
 {
-	readonly DataContext _dataContext;
-	public ProductController(DataContext dataContext)
+	[ApiController]
+	[Route("api/v1/product")]
+	public class ProductController : ControllerBase
 	{
-		_dataContext = dataContext;
-	}
+		private readonly DataContext _dataContext;
+		private readonly IFileService _fileService;
+		private readonly IVerificationService _verificationService;
 
 
-	[HttpPost("add-product")]
-	public async Task<ActionResult<List<ProductModel>>> Add( [FromForm] ProductModel product)
-	{
-		product.Id = Guid.NewGuid();
-		_dataContext.Products.Add(product);
-		await _dataContext.SaveChangesAsync();
-		return Ok(await _dataContext.Products.ToListAsync());
-	}
+		public ProductController(DataContext dataContext, IFileService fileService, IVerificationService verificationService)
+		{
+			_dataContext = dataContext;
+			_fileService = fileService;
+			_verificationService = verificationService;
+		}
 
-	[HttpGet("get-all-products")]
-	public async Task<ActionResult<List<ProductModel>>> Get()
-	{
-		return Ok(await _dataContext.Products.ToListAsync());
-	}
 
-	[HttpGet("get-by-id/{id}")]
-	public async Task<ActionResult<ProductModel>> Get([FromForm] Guid id)
-	{
-		var product = await _dataContext.Products.FindAsync(id);
 
-		if (product == null) { return BadRequest("product no found"); }
 
-		return Ok(product);
-	}
+		[HttpGet("get-all")]
+		[Produces(typeof(List<ProductListItemDto>))]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<List<ProductModel>>> Get()
+		{
+			try
+			{
+				var product = await _dataContext.Products.Select(p => new ProductListItemDto
+				{
+					Id = p.Id,
+					Name = p.Name,
+					Description = p.Description,
+					PhisicalImageName = _fileService.ReadStaticFiles(p.ProductPrefix, CustomUploadDirectories.Products, p.PyshicalImageName),
+					CreatedAt = p.CreatedAt,
+					UpdatedAt = p.UpdatedAt,
+					ProductPrefix= p.ProductPrefix
+				}).ToListAsync();
+				return Ok(product);
 
-	[HttpGet("get-procuct-by-name/{name}")]
-	public async Task<ActionResult<IEnumerable<ProductModel>>> Get( string name)
-	{
-		var products = await _dataContext.Products.
-			Where(p=> p.Name.ToLower()== name.ToLower()).
-			ToListAsync();
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message, ex);
+			}
 
-		if(products == null || !products.Any()) { return BadRequest("Porduct name cant found"); }
-		return Ok(products);
-	}
+		}
 
-	[HttpPut("update-product-id{id}")]
-	public async Task<ActionResult<List<ProductModel>>> Update([FromForm] ProductModel request,[FromForm] Guid id)
-	{
-		var product = await _dataContext.Products.FindAsync(id);
-		if (product == null) { return NotFound("Product not found"); }
-		product.Name = request.Name;
-		product.Description = request.Description;
-		product.Price = request.Price;
-		product.Brand = request.Brand;
 
-		await _dataContext.SaveChangesAsync();
+		[HttpPost("add-product")]
+		[ProducesResponseType(StatusCodes.Status201Created)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[Consumes("multipart/form-data")]
+		public async Task<ActionResult<Category>> AddCategory( [FromForm] ProductPostDto productPostDto)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-		return Ok(product);
+			var product = new ProductModel
+			{
+				Name = productPostDto.Name,
+				Description = productPostDto.Description,
+				Price = productPostDto.Price,
+				ProductPrefix = _verificationService.RandomFolderPrefixGenerator(Prefix.CATEGORY),
+				CreatedAt = DateTime.UtcNow,
+				UpdatedAt = DateTime.UtcNow
+			};
 
-	}
+			product.PyshicalImageName = await _fileService.UploadAsync(CustomUploadDirectories.Products, productPostDto.PyshicalImageName,product.ProductPrefix);
 
-	[HttpDelete("remove-product-id/{id}")]
-	public async Task<ActionResult<ProductModel>> Delete([FromForm] Guid id)
-	{
-		var product = await _dataContext.Products.FindAsync(id); 
-		if (product == null) { return NotFound("Product not found"); }
-		_dataContext.Products.Remove(product);
-		await _dataContext.SaveChangesAsync();
-		return Ok(product);
+			await _dataContext.AddAsync(product);
+			await _dataContext.SaveChangesAsync();
+
+			return Ok(product);
+		}
+
+		[HttpPut("{id}")]
+		public void Put(int id, [FromBody] string value)
+		{
+		}
+
+		[HttpDelete("{id}")]
+		public void Delete(int id)
+		{
+		}
 	}
 }
