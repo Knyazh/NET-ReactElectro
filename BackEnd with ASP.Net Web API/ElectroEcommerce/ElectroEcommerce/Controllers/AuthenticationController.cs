@@ -11,6 +11,8 @@ using ElectroEcommerce.CustomEx;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using ElectroEcommerce.DataBase;
+using ElectroEcommerce.Services.Concretes;
 
 namespace ElectroEcommerce.Controllers;
 
@@ -25,23 +27,26 @@ public class AuthenticationController : ControllerBase
 		private readonly IActivationService _activationSerive;
 		private readonly INotificationService _notificationService;
 		private readonly IUserService _user_Service;
+		private readonly ILogger<AuthenticationController> _logger;
 
-		public AuthenticationController(DataContext dataContext,
-			IVerificationService verificationService,
-			IFileService fileService,
-			IActivationService activationSerive,
-			INotificationService notificationService,
-			IUserService user_Service)
-		{
-			_dataContext = dataContext;
-			_verificationService = verificationService;
-			_fileService = fileService;
-			_activationSerive = activationSerive;
-			_notificationService = notificationService;
-			_user_Service = user_Service;
-		}
+	public AuthenticationController(DataContext dataContext,
+		IVerificationService verificationService,
+		IFileService fileService,
+		IActivationService activationSerive,
+		INotificationService notificationService,
+		IUserService user_Service,
+		ILogger<AuthenticationController> logger)
+	{
+		_dataContext = dataContext;
+		_verificationService = verificationService;
+		_fileService = fileService;
+		_activationSerive = activationSerive;
+		_notificationService = notificationService;
+		_user_Service = user_Service;
+		_logger = logger;
+	}
 
-		[HttpPost("auth/register")]
+	[HttpPost("auth/register")]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[Consumes("multipart/form-data")]
@@ -258,4 +263,146 @@ public class AuthenticationController : ControllerBase
 
 		return NoContent();
 	}
+
+	[HttpGet("get-all")]
+	[Produces(type: typeof(List<UserListItemDto>))]
+	[ProducesResponseType(statusCode: StatusCodes.Status200OK)]
+	[ProducesResponseType(statusCode: StatusCodes.Status500InternalServerError)]
+
+	public async Task<IActionResult> Get()
+	{
+		try
+		{
+			var users = await _dataContext.Users.Where(u => u.IsComfirmed == true && u.Role == Role.Values.User)
+				  .Select(u => new UserListItemDto
+				  {
+					  Name = u.Name,
+					  LastName = u.LastName,
+					  PhoneNumber = u.PhoneNumber,
+					  Email = u.Email,
+					  CreatedAt = u.CreatedAt,
+					  UpdatedAt = u.UpdatedAt,
+					  IsAdmin = u.IsAdmin,
+					  PhisicalImageURL = _fileService
+					  .ReadStaticFiles(u.UserPrefix, CustomUploadDirectories.Users, u.PhysicalImageUrl)
+				  }).OrderBy(u => u.Name).OrderBy(u => u.CreatedAt).ToListAsync();
+
+			return Ok(users);
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "Error proccessing");
+			return StatusCode(500,"Proccessing error try again");
+		}
+	}
+
+
+	[HttpGet("get/{Id}")]
+	
+	public async Task<IActionResult> Get( [FromRoute]Guid Id)
+	{
+		try
+		{
+			var user = await _dataContext.Users.SingleOrDefaultAsync(u => u.Id.Equals(Id));
+			if (user is null)
+				return NotFound($"The user with the << {Id} >> number you are looking for does not already exist in the database!");
+
+			var response = new UserListItemDto
+			{
+				Name = user.Name,
+				LastName = user.LastName,
+				PhoneNumber = user.PhoneNumber,
+				Email = user.Email,
+				CreatedAt = user.CreatedAt,
+				UpdatedAt = user.UpdatedAt,
+				IsAdmin = user.IsAdmin,
+				PhisicalImageURL = _fileService
+					.ReadStaticFiles(user.UserPrefix, CustomUploadDirectories.Users, user.PhysicalImageUrl)
+			};
+
+			return Ok(response);
+
+		}
+		catch (Exception exception)
+		{
+			_logger.LogError(exception, "processing error.");
+
+			return StatusCode(500, "Please try again later.");
+		}
+	}
+
+	[HttpDelete("delete/{applicationPassword}")]
+
+	public async Task<IActionResult> Delete([FromRoute] string applicationPassword)
+	{
+		try
+		{
+			var user = await _dataContext.Users.SingleOrDefaultAsync(u => u.ApplicationPassword.Equals(applicationPassword));
+			if (user == null) return NotFound($"The user with this <<{applicationPassword}>> password was not found in the database!");
+
+			if (user.PhysicalImageUrl is not null)
+			{
+				_fileService.RemoveStaticFiles(user.UserPrefix,
+					CustomUploadDirectories.Users, user.PhysicalImageUrl);
+			}
+
+			_dataContext.Users.Remove(user);
+			await _dataContext.SaveChangesAsync();
+			return NoContent();
+		}
+		catch (Exception exception)
+		{
+			_logger.LogError(exception, "error processing ");
+
+			return StatusCode(500, "Please try again later.");
+		}
+	}
+
+
+
+
+	[HttpGet("details/{Id}")]
+	[ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+	[ProducesResponseType(statusCode: StatusCodes.Status200OK)]
+	[ProducesResponseType(statusCode: StatusCodes.Status500InternalServerError)]
+	[Produces(type: typeof(UserListItemDto))]
+	public async Task<IActionResult> Details([FromRoute] Guid Id)
+	{
+		try
+		{
+			var user = await _dataContext.Users.SingleOrDefaultAsync(u => u.Id.Equals(Id));
+			if (user is null)
+				return NotFound($"User Cant Found");
+
+			var response = new UserDetailsDto
+			{
+				Name = user.Name,
+				LastName = user.LastName,
+				PhoneNumber = user.PhoneNumber,
+				Password = user.Password,
+				Email = user.Email,
+				CreatedAt = user.CreatedAt,
+				ConfirmedDate = user.ConfirmedDate,
+				UpdatedAt = user.UpdatedAt,
+				ApplicationPassword = user.ApplicationPassword,
+				IsComfirmed = user.IsComfirmed,
+				PhisicalImageURL = _fileService
+					.ReadStaticFiles(user.UserPrefix, CustomUploadDirectories.Users, user.PhysicalImageUrl)
+			};
+
+			return Ok(response);
+		}
+		catch (Exception exception)
+		{
+			_logger.LogError(exception, "error  processing.");
+
+			return StatusCode(500, "Please try again later.");
+		}
+	}
+
+
+
+
+
+
 }

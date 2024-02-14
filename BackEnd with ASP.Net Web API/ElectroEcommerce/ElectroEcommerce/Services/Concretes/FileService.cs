@@ -15,8 +15,8 @@ public class FileService : IFileService
 	{
 		_env = env;
 		_httpContextAccessor = httpContextAccessor;
-		_filePath = _env.WebRootPath;
 		_directory = Directory.GetCurrentDirectory();
+		_filePath = _env.WebRootPath;
 		_hostURL = Path.Combine($"{_httpContextAccessor.HttpContext!.Request.Scheme}:",
 								$"{_httpContextAccessor.HttpContext.Request.Host}{_httpContextAccessor.HttpContext.Request.PathBase}");
 	}
@@ -24,7 +24,7 @@ public class FileService : IFileService
 
 	private string StaticFilesDirectory(CustomUploadDirectories customUploadDirectories, string folderPrefix)
 	{
-		return $"{Path.Combine(_directory, _filePath, "Upload", "Images", customUploadDirectories.ToString(), folderPrefix)}";
+		return $"{Path.Combine(_directory, _filePath, "Upload", "images", customUploadDirectories.ToString(), folderPrefix)}";
 	}
 
 	public async Task<string> UploadAsync(CustomUploadDirectories directories, IFormFile file, string folderPrefix)
@@ -131,7 +131,7 @@ public class FileService : IFileService
 		}
 		return fileUrl;
 	}
-
+		
 	public List<string> ReadStaticFiles(string folderPrefix, CustomUploadDirectories directories, List<string> physicalImageNames)
 	{
 		List<string> fileUrls = new();

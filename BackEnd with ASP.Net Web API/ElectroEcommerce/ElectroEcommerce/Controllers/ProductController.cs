@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using ElectroEcommerce.DataBase.DTOs.Category;
 using ElectroEcommerce.DataBase.DTOs.Product;
 using ElectroEcommerce.Contracts;
+using Microsoft.AspNetCore.Http.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ElectroEcommerce.Controllers
 {
@@ -79,10 +82,25 @@ namespace ElectroEcommerce.Controllers
 
 			product.PyshicalImageName = await _fileService.UploadAsync(CustomUploadDirectories.Products, productPostDto.PyshicalImageName,product.ProductPrefix);
 
+			try
+			{
+
 			await _dataContext.AddAsync(product);
 			await _dataContext.SaveChangesAsync();
 
-			return Ok(product);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message + ex.StackTrace, ex);
+			}
+
+			var jsonOptions = new JsonSerializerOptions
+			{
+				ReferenceHandler = ReferenceHandler.Preserve
+			};
+
+			var URL = "https://localhost:7010/api/v1/product/get/" + product.Id;
+			return Created(URL, JsonSerializer.Serialize(product, jsonOptions));
 		}
 
 		[HttpPut("{id}")]
