@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using ElectroEcommerce.DataBase;
 using ElectroEcommerce.Services.Concretes;
+using ElectroEcommerce.Migrations;
 
 namespace ElectroEcommerce.Controllers;
 
@@ -241,6 +242,8 @@ public class AuthenticationController : ControllerBase
 			return BadRequest(ModelState);
 		}
 
+
+
 		var claims = new List<Claim>
 			{
 				 new Claim("Id", user.Id.ToString()),
@@ -338,7 +341,7 @@ public class AuthenticationController : ControllerBase
 		try
 		{
 			var user = await _dataContext.Users.SingleOrDefaultAsync(u => u.ApplicationPassword.Equals(applicationPassword));
-			if (user == null) return NotFound($"The user with this <<{applicationPassword}>> password was not found in the database!");
+			if (user == null) return NotFound("User Cant Found");
 
 			if (user.PhysicalImageUrl is not null)
 			{
@@ -397,6 +400,47 @@ public class AuthenticationController : ControllerBase
 			_logger.LogError(exception, "error  processing.");
 
 			return StatusCode(500, "Please try again later.");
+		}
+	}
+
+
+	[HttpPut("update/{applicationPassword}")]
+	[ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+	[ProducesResponseType(statusCode: StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(statusCode: StatusCodes.Status200OK)]
+	[ProducesResponseType(statusCode: StatusCodes.Status500InternalServerError)]
+	[Consumes("multipart/form-data")]
+	public async Task<IActionResult> Update([FromRoute] string applicationPassword, [FromForm] UserUpdateDto userUpdateDto)
+	{
+		try
+		{
+			var user = await _dataContext.Users.SingleOrDefaultAsync(u => u.ApplicationPassword.Equals(applicationPassword));
+			if (user == null) return NotFound($"The user with this <<{applicationPassword}>> password was not found in the database!");
+
+			if (!ModelState.IsValid) return BadRequest(ModelState);
+
+			if (userUpdateDto.File is not null)
+			{
+				_fileService.RemoveStaticFiles(user.UserPrefix, CustomUploadDirectories.Users, user.PhysicalImageUrl);
+				await _fileService.UploadAsync(CustomUploadDirectories.Users, userUpdateDto.File, user.UserPrefix);
+
+			}
+			user.Name = userUpdateDto.Name;
+			user.LastName = userUpdateDto.LastName;
+			user.PhoneNumber = userUpdateDto.PhoneNumber;
+			user.Password = _verificationService.HashPassword(userUpdateDto.Password);
+			user.UpdatedAt = DateTime.UtcNow;
+
+			_dataContext.Users.Update(user);
+			await _dataContext.SaveChangesAsync();
+
+			return Ok(user);
+		}
+		catch (Exception exception)
+		{
+			_logger.LogError(exception, "error processing .");
+
+			return StatusCode(500, " Please try again later.");
 		}
 	}
 

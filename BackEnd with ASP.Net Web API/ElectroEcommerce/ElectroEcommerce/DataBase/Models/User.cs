@@ -16,6 +16,8 @@ public class User : BaseEntity<Guid> , IAuditable
     public bool IsComfirmed { get; set; } = false;
     public bool IsAdmin { get; set; } = false;
 
+    public bool IsBanned { get; set; } = false;
+
 	public DateTime ConfirmedDate { get; set; }
 	public string ApplicationPassword { get; set; } = string.Empty;
 	public DateTime CreatedAt { get ; set ; }
