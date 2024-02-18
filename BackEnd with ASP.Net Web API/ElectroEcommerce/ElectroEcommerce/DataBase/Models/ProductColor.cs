@@ -2,7 +2,7 @@
 
 namespace ElectroEcommerce.DataBase.Models;
 
-public class ProductColor : BaseEntity<Guid>, IAuditable
+public class ProductColor 
 {
 	public ProductModel Product { get; set; }
 	public Guid ProductId { get; set; }

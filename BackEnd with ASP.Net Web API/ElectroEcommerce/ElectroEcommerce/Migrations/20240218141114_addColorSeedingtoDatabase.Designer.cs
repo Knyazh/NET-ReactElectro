@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ElectroEcommerce.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ElectroEcommerce.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240218141114_addColorSeedingtoDatabase")]
+    partial class addColorSeedingtoDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,7 +118,7 @@ namespace ElectroEcommerce.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ColorCode")
+                    b.Property<string>("ColorPrefix")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
@@ -136,7 +138,7 @@ namespace ElectroEcommerce.Migrations
                         new
                         {
                             Id = new Guid("4b24804b-9a8f-4d33-9f43-8c461e4dbf11"),
-                            ColorCode = "#000000",
+                            ColorPrefix = "#000000",
                             CreatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "black",
                             UpdatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc)
@@ -144,7 +146,7 @@ namespace ElectroEcommerce.Migrations
                         new
                         {
                             Id = new Guid("9c327764-bf90-4b8b-8c38-370cb3aa2a5a"),
-                            ColorCode = "#ffffff",
+                            ColorPrefix = "#ffffff",
                             CreatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "white",
                             UpdatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc)
@@ -152,7 +154,7 @@ namespace ElectroEcommerce.Migrations
                         new
                         {
                             Id = new Guid("8a4c94f8-2437-4e89-9075-56bbcf19c0e9"),
-                            ColorCode = "#a52a2a",
+                            ColorPrefix = "#a52a2a",
                             CreatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "brown",
                             UpdatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc)
@@ -160,7 +162,7 @@ namespace ElectroEcommerce.Migrations
                         new
                         {
                             Id = new Guid("af15118a-95ac-487a-b103-c9a0a1918c25"),
-                            ColorCode = "#0000ff",
+                            ColorPrefix = "#0000ff",
                             CreatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "blue",
                             UpdatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc)
@@ -168,7 +170,7 @@ namespace ElectroEcommerce.Migrations
                         new
                         {
                             Id = new Guid("6c1d50fc-b6eb-4d76-ba7e-81a7811ea15f"),
-                            ColorCode = "#ff0000",
+                            ColorPrefix = "#ff0000",
                             CreatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "red",
                             UpdatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc)
@@ -176,7 +178,7 @@ namespace ElectroEcommerce.Migrations
                         new
                         {
                             Id = new Guid("3e20ac3a-c156-4f60-b0b4-e1f1c205e24d"),
-                            ColorCode = "#808080",
+                            ColorPrefix = "#808080",
                             CreatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "gray",
                             UpdatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc)
@@ -184,7 +186,7 @@ namespace ElectroEcommerce.Migrations
                         new
                         {
                             Id = new Guid("db1ef4d9-5b95-41a3-8bfb-7f01f8a50f32"),
-                            ColorCode = "#008000",
+                            ColorPrefix = "#008000",
                             CreatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "green",
                             UpdatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc)
@@ -192,7 +194,7 @@ namespace ElectroEcommerce.Migrations
                         new
                         {
                             Id = new Guid("45e0cbf9-aa2a-44a4-93a1-bf4d3aa623ce"),
-                            ColorCode = "#ffff00",
+                            ColorPrefix = "#ffff00",
                             CreatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "yellow",
                             UpdatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc)
@@ -200,7 +202,7 @@ namespace ElectroEcommerce.Migrations
                         new
                         {
                             Id = new Guid("8640c057-8997-4b16-b3dd-7c3d3c2e1a12"),
-                            ColorCode = "#2f4f4f",
+                            ColorPrefix = "#2f4f4f",
                             CreatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "darkslategray",
                             UpdatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc)
@@ -208,7 +210,7 @@ namespace ElectroEcommerce.Migrations
                         new
                         {
                             Id = new Guid("7a9d04e8-1a22-4aae-8232-62f5a0c28b87"),
-                            ColorCode = "#663399",
+                            ColorPrefix = "#663399",
                             CreatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "rebeccapurple",
                             UpdatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc)
@@ -216,7 +218,7 @@ namespace ElectroEcommerce.Migrations
                         new
                         {
                             Id = new Guid("2ff83d6b-6c95-4f7d-9c64-60e406a057a1"),
-                            ColorCode = "#ffe4c4",
+                            ColorPrefix = "#ffe4c4",
                             CreatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "bisque",
                             UpdatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc)
@@ -224,7 +226,7 @@ namespace ElectroEcommerce.Migrations
                         new
                         {
                             Id = new Guid("9a305d7f-5c8f-4fe1-9c0d-d8a8eb4a17c3"),
-                            ColorCode = "#ffe4c4",
+                            ColorPrefix = "#ffe4c4",
                             CreatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "bisque",
                             UpdatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc)
@@ -232,7 +234,7 @@ namespace ElectroEcommerce.Migrations
                         new
                         {
                             Id = new Guid("c80a742d-12db-4a19-a0e8-44c67f7fb21a"),
-                            ColorCode = "#00ced1",
+                            ColorPrefix = "#00ced1",
                             CreatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             Name = "darkturquoise",
                             UpdatedAt = new DateTime(2023, 10, 19, 0, 0, 0, 0, DateTimeKind.Utc)
@@ -308,6 +310,9 @@ namespace ElectroEcommerce.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -430,7 +435,7 @@ namespace ElectroEcommerce.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e461f5ac-c2b3-46d4-890d-2403d987155e"),
+                            Id = new Guid("c13159cd-46a3-4262-9efe-f84fb7583d98"),
                             ApplicationPassword = "",
                             ConfirmedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),

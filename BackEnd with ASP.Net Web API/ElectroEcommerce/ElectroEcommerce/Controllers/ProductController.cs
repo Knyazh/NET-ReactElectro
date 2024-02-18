@@ -132,9 +132,9 @@ public class ProductController : ControllerBase
 			}
 		}
 
-	
+			await _dataContext.SaveChangesAsync();
 
-		var jsonOptions = new JsonSerializerOptions
+			var jsonOptions = new JsonSerializerOptions
 		{
 			ReferenceHandler = ReferenceHandler.Preserve
 		};
