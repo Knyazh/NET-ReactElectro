@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using ElectroEcommerce.DataBase;
 using ElectroEcommerce.Services.Concretes;
-using ElectroEcommerce.Migrations;
 
 namespace ElectroEcommerce.Controllers;
 

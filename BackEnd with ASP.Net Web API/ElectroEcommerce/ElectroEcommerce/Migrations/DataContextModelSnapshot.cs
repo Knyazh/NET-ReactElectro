@@ -321,7 +321,7 @@ namespace ElectroEcommerce.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2a25d2d4-5a80-4ce8-8f95-5afae62f0827"),
+                            Id = new Guid("4104d574-c5d2-4ff1-99c6-c628bcd6c995"),
                             ApplicationPassword = "",
                             ConfirmedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
