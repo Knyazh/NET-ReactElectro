@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ElectroEcommerce.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ElectroEcommerce.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240218081651_newBase")]
+    partial class newBase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,7 +86,7 @@ namespace ElectroEcommerce.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brand");
                 });
 
             modelBuilder.Entity("ElectroEcommerce.DataBase.Models.Category", b =>
@@ -321,7 +323,7 @@ namespace ElectroEcommerce.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2a25d2d4-5a80-4ce8-8f95-5afae62f0827"),
+                            Id = new Guid("a39b3fd7-15f8-49be-ba69-bff518d28fdf"),
                             ApplicationPassword = "",
                             ConfirmedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),

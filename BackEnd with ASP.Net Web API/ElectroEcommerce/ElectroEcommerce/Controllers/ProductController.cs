@@ -63,7 +63,7 @@ namespace ElectroEcommerce.Controllers
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[Consumes("multipart/form-data")]
-		public async Task<ActionResult<Category>> AddCategory( [FromForm] ProductPostDto productPostDto)
+		public async Task<ActionResult<Category>> AddProduct( [FromForm] ProductPostDto productPostDto)
 		{
 			if (!ModelState.IsValid)
 			{

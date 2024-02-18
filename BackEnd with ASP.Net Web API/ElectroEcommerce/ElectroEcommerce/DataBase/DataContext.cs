@@ -1,6 +1,7 @@
 ﻿using ElectroEcommerce.DataBase.Base;
 using ElectroEcommerce.DataBase.Models;
 using Microsoft.EntityFrameworkCore;
+using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace ElectroEcommerce.DataBase;
 
@@ -38,12 +39,38 @@ public class DataContext : DbContext
 
 		base.OnModelCreating(modelBuilder);
 
+		#region 1x Many Email and User
+
+		modelBuilder.Entity<Email>()
+			.HasOne<User>(e => e.User)
+			.WithMany(u => u.Emails)
+			.HasForeignKey(e => e.UserId);
+		#endregion
+
+		#region 1x 1 User and Activationtoken
+		modelBuilder.Entity<User>()
+			  .HasOne<ActivationToken>(u => u.ActivationToken)
+			  .WithOne(act => act.User)
+			  .HasForeignKey<ActivationToken>(act => act.UserId);
+
+		#endregion
+
+		#region 1x Many Brand and Product
+		modelBuilder.Entity<ProductModel>()
+			 .HasOne<Brand>(p => p.Brand)
+			 .WithMany(br => br.Products)
+			 .HasForeignKey(p => p.CurrentBrandId);
+		#endregion
+
+		#region 1x Many User and Order
 		modelBuilder.Entity<Order>()
 			.HasOne<User>(o => o.User)
 			.WithMany(u => u.Orders)
 			.HasForeignKey(o => o.UserId);
 
+		#endregion
 
+		#region  many to many Product and Color
 		modelBuilder.Entity<ProductColor>()
 			 .HasKey(pc => new { pc.ProductId, pc.ColorId });
 
@@ -56,11 +83,8 @@ public class DataContext : DbContext
 			.HasOne(pc => pc.Color)
 			.WithMany(c => c.ProductColors)
 			.HasForeignKey(pc => pc.ColorId);
+		#endregion
 
-		modelBuilder.Entity<User>()
-			  .HasOne<ActivationToken>(u => u.ActivationToken)
-			  .WithOne(act => act.User)
-			  .HasForeignKey<ActivationToken>(act => act.UserId);
 
 		#region Admin Seeding
 		modelBuilder.Entity<User>().HasData(
@@ -92,6 +116,7 @@ public class DataContext : DbContext
 	public DbSet<RandomPrefixFolder> PrefixFolders { get; set; }
 	public DbSet<ActivationToken> ActivationTokens { get; set; }
 	public DbSet<Email> Emails { get; set; }
+	public DbSet<Brand> Brands { get; set; }
 
 
 

@@ -1,4 +1,5 @@
 ﻿using ElectroEcommerce.DataBase.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ElectroEcommerce.DataBase.Models;
 
@@ -8,8 +9,6 @@ public class ProductModel : BaseEntity<Guid>, IAuditable
     public string Description { get; set; } = string.Empty;
     public decimal Price { get; set; } = 0;
 
-    public decimal Brand { get; set; } = 0;
-
     public decimal Amount { get; set; }
 
     public string PyshicalImageName { get; set; }
@@ -17,6 +16,9 @@ public class ProductModel : BaseEntity<Guid>, IAuditable
 
 	public DateTime CreatedAt { get; set; }
 	public DateTime UpdatedAt { get; set; }
+	public Guid CurrentBrandId { get; set; }
 
-    public List<ProductColor> ProductColors { get; set; }
+	public List<ProductColor> ProductColors { get; set; }
+
+	public Brand Brand { get; set; }
 }
