@@ -9,9 +9,27 @@ public class ProductModel : BaseEntity<Guid>, IAuditable
     public string Description { get; set; } = string.Empty;
     public decimal Price { get; set; } = 0;
 
-    public decimal Amount { get; set; }
+	private decimal _quantity;
+	private bool _isAvailable = true;
 
-    public string PyshicalImageName { get; set; }
+	public decimal Quantity
+	{
+		get { return _quantity; }
+		set
+		{
+			_quantity = value;
+
+			_isAvailable = (_quantity > 0);
+		}
+	}
+
+	public bool IsAvailable
+	{
+		get { return _isAvailable; }
+		private set { }
+	}
+
+	public List<string> PyshicalImageNames { get; set; }= new List<string>();
     public string ProductPrefix { get; set; }
 
 	public DateTime CreatedAt { get; set; }

@@ -8,7 +8,10 @@ namespace ElectroEcommerce.DataBase.DTOs.Product
 		public string Name { get; set; } = string.Empty;
 		public string Description { get; set; } = string.Empty;
 		public decimal Price { get; set; } = 0;
-		public IFormFile PyshicalImageName { get; set; }
+		public int Quantity { get; set; }
+		public Guid CurrentBrandId { get; set; }
+		public Guid[] ColorIds { get; set; }
+		public IFormFileCollection PyshicalImageNames { get; set; }
 		
 	}
 }
