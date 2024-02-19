@@ -102,19 +102,8 @@ public class CategoryController : ControllerBase
 	}
 
 
-	[HttpPost]
-	public async Task<IActionResult> Email(string recipient, string subject, string body)
-	{
-		await _emailService.SendEmailAsync(recipient, subject, body);
-		return Ok();
-	}
+	
 
-	[HttpPost("sms-send")]
-	public IActionResult SendSms(string number,string sms)
-	{
-		_smsService.SendSMSAsync(number,sms);
-		return Ok();
-	}
 
 
 }

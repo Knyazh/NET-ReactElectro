@@ -50,6 +50,13 @@ public class Program
 				});
 		});
 
+
+		using (var scope = builder.Services.BuildServiceProvider().CreateScope())
+		{
+			var dbContext = scope.ServiceProvider.GetRequiredService<DataContext>();
+			SeedData.SeedDatabase(dbContext);
+		}
+
 		var app = builder.Build();
 
 		if (app.Environment.IsDevelopment())
@@ -66,6 +73,7 @@ public class Program
 
 
 		app.MapControllers();
+		
 
 		app.Run();
 	}

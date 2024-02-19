@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ElectroEcommerce.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ElectroEcommerce.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240219115729_seedingcolorsdata")]
+    partial class seedingcolorsdata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -324,7 +326,7 @@ namespace ElectroEcommerce.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("588c9440-2256-4d23-8caf-b0cbd0463bb8"),
+                            Id = new Guid("68457829-bf9d-4ec9-aec9-22f35a5a7246"),
                             ApplicationPassword = "",
                             ConfirmedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
