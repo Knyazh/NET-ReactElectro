@@ -101,10 +101,6 @@ public class DataContext : DbContext
 			);
 		#endregion
 
-
-
-	
-
 	}
 
 
@@ -118,6 +114,7 @@ public class DataContext : DbContext
 
 	public DbSet<Category> Categories { get; set; }
 	public DbSet<Order> Orders { get; set; }
+	public DbSet<OrderItem> Items { get; set; }
 	public DbSet<Color> Colors{ get; set; }
 	public DbSet<ProductColor> ProductColors { get; set; }
 	public DbSet<RandomPrefixFolder> PrefixFolders { get; set; }
