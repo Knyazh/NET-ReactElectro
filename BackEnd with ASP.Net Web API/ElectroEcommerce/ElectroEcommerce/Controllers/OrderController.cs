@@ -15,11 +15,13 @@ namespace ElectroEcommerce.Controllers
 
 		[HttpPost("place-order")]
 		public ActionResult PlaceOrder(
-			[FromServices] DbContext dbContext,
+			[FromServices] DataContext dbContext,
 			[FromServices] IUserService userService,
 			[FromServices] IOrderService orderService,
 			[FromServices] IFileService fileService,
-			[FromServices] IBasketService basketService)
+			[FromServices] IBasketService basketService,
+			[FromServices] IVerificationService verificationService)
+			
 		{
 			var order = new Order
 			{
@@ -34,9 +36,8 @@ namespace ElectroEcommerce.Controllers
 
 			foreach (var basketItem in basketItems)
 			{
-				var product = pustokDbContext.Products.Single(p => p.Id == basketItem.ProductId);
-				var color = pustokDbContext.Colors.Single(p => p.Id == basketItem.ColorId);
-				var size = pustokDbContext.Sizes.Single(p => p.Id == basketItem.SizeId);
+				var product = dbContext.Products.Single(p => p.Id == basketItem.ProductId);
+				var color = dbContext.Colors.Single(p => p.Id == basketItem.ColorId);
 
 				var orderItem = new OrderItem
 				{
@@ -44,13 +45,19 @@ namespace ElectroEcommerce.Controllers
 					ProductName = product.Name,
 					ProductDescription = product.Description,
 					ProductPrice = product.Price,
-					ProductOrderPhoto = fileService
-						.GetStaticFilesUrl(CustomUploadDirectories.Products, product.PhysicalImageName),
 					ProductColorName = color.Name,
-					ProductQuantity = basketItem.Quantity,
-					ProductSizeName = size.Name,
+					OrderItemPrefix = verificationService.RandomFolderPrefixGenerator(Prefix.OrderItem),
+					ProductQuantity = basketItem.Quantity
 				};
 
+				var productOrderPhotos = new List<string>();
+				foreach (var imageName in product.PyshicalImageNames)
+				{
+					var productOrderPhoto = fileService.ReadStaticFiles(orderItem.OrderItemPrefix, CustomUploadDirectories.OrderItems, imageName);
+					productOrderPhotos.Add(productOrderPhoto);
+				}
+
+				orderItem.ProductOrderPhotos = productOrderPhotos;
 				total += basketItem.Quantity * product.Price;
 
 				orderItems.Add(orderItem);
@@ -58,10 +65,9 @@ namespace ElectroEcommerce.Controllers
 
 			order.OrderItems = orderItems;
 
-			_nofitificationService.SendOrderNotification(order);
 
-			pustokDbContext.Orders.Add(order);
-			pustokDbContext.SaveChanges();
+			dbContext.Orders.Add(order);
+			dbContext.SaveChanges();
 
 			basketService.ClearBasket();
 

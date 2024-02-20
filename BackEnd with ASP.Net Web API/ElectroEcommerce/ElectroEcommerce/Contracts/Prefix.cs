@@ -6,4 +6,5 @@ public class Prefix
 	public const string PRODUCT = "PRC";
 	public const string BRAND = "BRD";
 	public const string CATEGORY = "CTG";
+	public const string OrderItem = "ORD";
 }

@@ -36,6 +36,8 @@ public class Program
 		.AddScoped<IVerificationService, VerificationSerivce>()
 		.AddScoped<IUserService, UserService>()
 		.AddScoped<INotificationService, NotificationService>()
+		.AddScoped<IBasketService, BasketService>()
+		.AddScoped<IOrderService , OrderService>()
 		.AddEndpointsApiExplorer()
 		.AddSwaggerGen()
 		.AddHttpContextAccessor()

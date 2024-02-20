@@ -85,6 +85,12 @@ public class DataContext : DbContext
 			.HasForeignKey(pc => pc.ColorId);
 		#endregion
 
+		#region 1x Many Order and OrderItem
+		modelBuilder.Entity<OrderItem>()
+			   .HasOne(o => o.Order)
+			   .WithMany(o => o.OrderItems)
+			   .HasForeignKey(o => o.OrderId);
+		#endregion
 
 		#region Admin Seeding
 		modelBuilder.Entity<User>().HasData(
