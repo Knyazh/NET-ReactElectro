@@ -255,7 +255,8 @@ public class AuthenticationController : ControllerBase
 
 		await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPricipal);
 
-		return Ok(user);
+		return Ok(new { message = "User successfully logged in", user });
+
 	}
 
 	[HttpGet("auth/logout")]
