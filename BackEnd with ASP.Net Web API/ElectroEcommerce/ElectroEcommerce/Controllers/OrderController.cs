@@ -12,9 +12,8 @@ namespace ElectroEcommerce.Controllers
 	public class OrderController : ControllerBase
 	{
 
-
-		[HttpPost("place-order")]
-		public ActionResult PlaceOrder(
+		[HttpPost("post")]
+		public ActionResult Post(
 			[FromServices] DataContext dbContext,
 			[FromServices] IUserService userService,
 			[FromServices] IOrderService orderService,
@@ -23,6 +22,11 @@ namespace ElectroEcommerce.Controllers
 			[FromServices] IVerificationService verificationService)
 			
 		{
+
+			if (!User.Identity.IsAuthenticated)
+			{
+				return BadRequest(new { Message = "User not authenticated" });
+			}
 			var order = new Order
 			{
 				Status = OrderStatus.Created,
