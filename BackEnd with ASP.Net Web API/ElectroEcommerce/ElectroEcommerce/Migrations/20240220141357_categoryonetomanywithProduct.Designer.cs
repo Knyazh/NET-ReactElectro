@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ElectroEcommerce.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ElectroEcommerce.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240220141357_categoryonetomanywithProduct")]
+    partial class categoryonetomanywithProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -271,7 +273,7 @@ namespace ElectroEcommerce.Migrations
                     b.Property<Guid>("CurrentBrandId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("CurrentCategoryId")
+                    b.Property<Guid>("CurrentCategoryId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
@@ -375,7 +377,7 @@ namespace ElectroEcommerce.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8af1209e-6f27-4cd9-8934-3fa657aa0a7f"),
+                            Id = new Guid("d5d5f7b1-aa74-4984-9a01-ea625d85ba1f"),
                             ApplicationPassword = "",
                             ConfirmedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -466,7 +468,9 @@ namespace ElectroEcommerce.Migrations
 
                     b.HasOne("ElectroEcommerce.DataBase.Models.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CurrentCategoryId");
+                        .HasForeignKey("CurrentCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Brand");
 

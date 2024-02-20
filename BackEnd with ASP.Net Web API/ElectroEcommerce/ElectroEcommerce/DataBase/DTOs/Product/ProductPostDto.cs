@@ -10,6 +10,7 @@ namespace ElectroEcommerce.DataBase.DTOs.Product
 		public decimal Price { get; set; } = 0;
 		public int Quantity { get; set; }
 		public Guid CurrentBrandId { get; set; }
+		public Guid CurrentCategoryId { get; set; }
 		public Guid[] ColorIds { get; set; }
 		public IFormFileCollection PyshicalImageNames { get; set; }
 		

@@ -61,6 +61,13 @@ public class DataContext : DbContext
 			 .WithMany(br => br.Products)
 			 .HasForeignKey(p => p.CurrentBrandId);
 		#endregion
+		modelBuilder.Entity<ProductModel>()
+			 .HasOne<Category>(p => p.Category)
+			 .WithMany(c => c.Products)
+			 .HasForeignKey(p => p.CurrentCategoryId);
+		#region 1x Many Category and Product
+
+		#endregion
 
 		#region 1x Many User and Order
 		modelBuilder.Entity<Order>()
@@ -110,14 +117,8 @@ public class DataContext : DbContext
 	}
 
 
-
-
-
-
 	public DbSet<User> Users { get; set; }
-
 	public DbSet<ProductModel> Products { get; set; }
-
 	public DbSet<Category> Categories { get; set; }
 	public DbSet<Order> Orders { get; set; }
 	public DbSet<OrderItem> Items { get; set; }

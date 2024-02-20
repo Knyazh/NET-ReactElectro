@@ -12,7 +12,8 @@ namespace ElectroEcommerce.DataBase.DTOs.Product
 		public decimal Price { get; set; }
 		public List<string> PhisicalImageNames { get; set; } = new List<string>();
 		public string ProductPrefix {  get; set; } = string.Empty;
-		public ElectroEcommerce.DataBase.Models.Brand CurrentBrand { get; set; }
+		public ElectroEcommerce.DataBase.Models.Brand Brand { get; set; }
+		public ElectroEcommerce.DataBase.Models.Category Category { get; set; }
 		public List<Color> Colors { get; set; }
 		public DateTime CreatedAt { get ; set ; }
 		public DateTime UpdatedAt { get ; set; }

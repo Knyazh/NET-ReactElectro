@@ -51,8 +51,10 @@ public class ProductController : ControllerBase
 				CreatedAt = p.CreatedAt,
 				UpdatedAt = p.UpdatedAt,
 				ProductPrefix = p.ProductPrefix,
-				CurrentBrand = _dataContext.Brands
+				Brand = _dataContext.Brands
 					.SingleOrDefault(br => br.Id.Equals(p.CurrentBrandId))!,
+				Category = _dataContext.Categories
+					.SingleOrDefault(c => c.Id.Equals(p.CurrentCategoryId))!,
 
 				Colors = _dataContext.ProductColors
 					.Where(pc => pc.ProductId.Equals(p.Id))
@@ -96,16 +98,24 @@ public class ProductController : ControllerBase
 			UpdatedAt = DateTime.UtcNow
 		};
 
-		if ((await _dataContext.Brands.AnyAsync(br => br.Id.Equals(productPostDto.CurrentBrandId))) is false)
-		{
-			return NotFound($"The brand with the  {productPostDto.CurrentBrandId}  Does not exist yet ");
-		}
+			if ((await _dataContext.Brands.AnyAsync(br => br.Id.Equals(productPostDto.CurrentBrandId))) is false)
+			{
+				return NotFound($"The brand with the  {productPostDto.CurrentBrandId}  Does not exist yet ");
+			}
 
 
-		product.CurrentBrandId = productPostDto.CurrentBrandId;
+			product.CurrentBrandId = productPostDto.CurrentBrandId;
+
+			if ((await _dataContext.Categories.AnyAsync(c => c.Id.Equals(productPostDto.CurrentCategoryId))) is false)
+			{
+				return NotFound($"The brand with the  {productPostDto.CurrentCategoryId}  Does not exist yet ");
+			}
 
 
-		if (productPostDto.PyshicalImageNames.Count > 0)
+			product.CurrentCategoryId = productPostDto.CurrentCategoryId;
+
+
+			if (productPostDto.PyshicalImageNames.Count > 0)
 		{
 			product.PyshicalImageNames = await _fileService
 				.UploadAsync(CustomUploadDirectories.Products, productPostDto.PyshicalImageNames, product.ProductPrefix);
@@ -177,8 +187,10 @@ public class ProductController : ControllerBase
 				PhisicalImageNames = _fileService
 				.ReadStaticFiles(product.ProductPrefix, CustomUploadDirectories.Products, product.PyshicalImageNames),
 
-				CurrentBrand = _dataContext.Brands
+				Brand = _dataContext.Brands
 				.SingleOrDefault(br => br.Id.Equals(product.CurrentBrandId))!,
+				Category = _dataContext.Categories
+				.SingleOrDefault(c => c.Id.Equals(product.CurrentCategoryId))!,
 
 				Colors = await _dataContext.ProductColors
 				.Where(pc => pc.ProductId.Equals(product.Id))

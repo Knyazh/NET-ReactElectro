@@ -35,8 +35,10 @@ public class ProductModel : BaseEntity<Guid>, IAuditable
 	public DateTime CreatedAt { get; set; }
 	public DateTime UpdatedAt { get; set; }
 	public Guid CurrentBrandId { get; set; }
+	public Guid? CurrentCategoryId { get; set; }
 
 	public List<ProductColor> ProductColors { get; set; }
 
+	public Category? Category { get; set; }
 	public Brand Brand { get; set; }
 }
