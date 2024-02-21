@@ -9,12 +9,11 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using ElectroEcommerce.DataBase.DTOs.Banner;
 using Microsoft.EntityFrameworkCore;
-using ElectroEcommerce.DataBase.DTOs.Brand;
 
 namespace ElectroEcommerce.Controllers;
 [Route("api/banner")]
 [ApiController]
-public class BannerControlller:ControllerBase	
+public class BannerController:ControllerBase	
 {
 	private readonly DataContext _dataContext;
 	private readonly IFileService _fileService;
@@ -22,7 +21,7 @@ public class BannerControlller:ControllerBase
 	private readonly ILogger<ProductController> _logger;
 
 
-	public BannerControlller(DataContext dataContext, IFileService fileService, IVerificationService verificationService, ILogger<ProductController> logger)
+	public BannerController(DataContext dataContext, IFileService fileService, IVerificationService verificationService, ILogger<ProductController> logger)
 	{
 		_dataContext = dataContext;
 		_fileService = fileService;
@@ -148,5 +147,77 @@ public class BannerControlller:ControllerBase
 			return StatusCode(500, ex.Message);
 		}
 
+	}
+
+
+
+	[HttpPut("update/{Id}")]
+	[ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+	[ProducesResponseType(statusCode: StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(statusCode: StatusCodes.Status200OK)]
+	[ProducesResponseType(statusCode: StatusCodes.Status500InternalServerError)]
+	[Consumes("multipart/form-data")]
+	public async Task<IActionResult> Update([FromRoute] Guid Id, [FromForm] BannerPostDto bannerPostDto)
+	{
+		try
+		{
+			var banner = await _dataContext.Banners.SingleOrDefaultAsync(br => br.Id.Equals(Id));
+			if (banner is null) return NotFound($"The Banner this <<{Id}>> no database yet!");
+
+			if (!ModelState.IsValid) return BadRequest(ModelState);
+
+			if (bannerPostDto.Files is not null)
+			{
+				_fileService.RemoveStaticFiles(banner.BannerPrefix, CustomUploadDirectories.Banners, banner.Files);
+				banner.Files = await _fileService.UploadAsync(CustomUploadDirectories.Banners, bannerPostDto.Files, banner.BannerPrefix);
+			}
+
+			banner.Name = bannerPostDto.Name;
+			banner.Description = bannerPostDto.Description;
+			banner.UpdatedAt = DateTime.UtcNow;
+
+
+			_dataContext.Banners.Update(banner);
+			await _dataContext.SaveChangesAsync();
+
+			return Ok(banner);
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "Processing error");
+			return StatusCode(500, ex.Message);
+		}
+	}
+
+
+
+	[HttpDelete("delete/{Id}")]
+	[ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+	[ProducesResponseType(statusCode: StatusCodes.Status500InternalServerError)]
+	[ProducesResponseType(statusCode: StatusCodes.Status204NoContent)]
+	public async Task<IActionResult> Delete([FromRoute] Guid Id)
+	{
+		try
+		{
+			var banner = await _dataContext.Banners.SingleOrDefaultAsync(br => br.Id.Equals(Id));
+			if (banner is null)
+				return NotFound($"The banner this <<{Id}>> no database yet");
+
+			if (banner.Files is not null)
+			{
+				_fileService.RemoveStaticFiles(banner.BannerPrefix, CustomUploadDirectories.Banners, banner.Files);
+
+			}
+
+			_dataContext.Banners.Remove(banner);
+			await _dataContext.SaveChangesAsync();
+
+			return NoContent();
+		}
+		catch (Exception exception)
+		{
+			_logger.LogError(exception, "An error occurred while processing the request.");
+			return StatusCode(500, "An error occurred while processing the request. Please try again later.");
+		}
 	}
 }
