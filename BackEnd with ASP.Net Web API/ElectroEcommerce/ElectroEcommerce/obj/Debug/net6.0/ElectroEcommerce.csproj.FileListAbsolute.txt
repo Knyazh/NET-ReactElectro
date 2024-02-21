@@ -52,3 +52,9 @@ C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcomm
 C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcommerce\ElectroEcommerce\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcommerce\ElectroEcommerce\bin\Debug\net6.0\Polly.dll
 C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcommerce\ElectroEcommerce\bin\Debug\net6.0\ElectroEcommerce.staticwebassets.runtime.json
+C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcommerce\ElectroEcommerce\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcommerce\ElectroEcommerce\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcommerce\ElectroEcommerce\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcommerce\ElectroEcommerce\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcommerce\ElectroEcommerce\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\asus\Desktop\NET-ReactElectro\BackEnd with ASP.Net Web API\ElectroEcommerce\ElectroEcommerce\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll

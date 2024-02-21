@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ElectroEcommerce.DataBase.DTOs.Category;
 
-public class CategoryPostDTO : BaseEntity<Guid>
+public class CategoryPostDTO 
 {
 	[Required(ErrorMessage = "Name is required!")]
 	public string Name { get; set; } = string.Empty;

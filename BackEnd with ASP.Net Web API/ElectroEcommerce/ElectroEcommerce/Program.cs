@@ -1,6 +1,7 @@
 global using ElectroEcommerce.DataBase;
 using ElectroEcommerce.Services.Abstracts;
 using ElectroEcommerce.Services.Concretes;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,10 +9,16 @@ namespace ElectroEcommerce;
 
 public class Program
 {
+	[Obsolete]
 	public static void Main(string[] args)
 	{
 		var builder = WebApplication.CreateBuilder(args);
-		builder.Services.AddControllers();
+		builder.Services.AddControllers()
+			.AddFluentValidation(x =>
+			{
+				x.ImplicitlyValidateChildProperties = true;
+				x.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+			});
 
 		builder.Services
 		.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
