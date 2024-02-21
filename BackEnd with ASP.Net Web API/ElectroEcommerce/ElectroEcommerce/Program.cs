@@ -9,16 +9,15 @@ namespace ElectroEcommerce;
 
 public class Program
 {
-	[Obsolete]
 	public static void Main(string[] args)
 	{
 		var builder = WebApplication.CreateBuilder(args);
-		builder.Services.AddControllers()
-			.AddFluentValidation(x =>
-			{
-				x.ImplicitlyValidateChildProperties = true;
-				x.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-			});
+		builder.Services.AddControllers();
+			//.AddFluentValidation(x =>
+			//{
+			//	x.ImplicitlyValidateChildProperties = true;
+			//	x.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+			//});
 
 		builder.Services
 		.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -27,7 +26,7 @@ public class Program
 			options.Cookie.Name = "MyCustomCookie";
 			options.LoginPath = "/auth/login";
 			options.LogoutPath = "/auth/logout";
-			options.ExpireTimeSpan = TimeSpan.FromHours(48);
+			options.ExpireTimeSpan = TimeSpan.FromHours(24);
 		});
 
 		builder.Services.AddLogging();

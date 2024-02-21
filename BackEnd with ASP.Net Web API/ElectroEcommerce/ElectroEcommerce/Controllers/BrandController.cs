@@ -20,16 +20,15 @@ namespace ElectroEcommerce.Controllers
 		private readonly IVerificationService _verificationService;
 		private readonly IFileService _fileService;
 		private readonly ILogger<BrandController> _logger;
-		private readonly IEmailService _emailService;
 
 		public BrandController(DataContext dataContext, IVerificationService verificationService, 
-			IFileService fileService, ILogger<BrandController> logger, IEmailService emailService)
+			IFileService fileService, ILogger<BrandController> logger)
 		{
 			_dataContext = dataContext;
 			_verificationService = verificationService;
 			_fileService = fileService;
 			_logger = logger;
-			_emailService = emailService;
+			
 		}
 
 

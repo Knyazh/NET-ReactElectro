@@ -14,16 +14,11 @@ public class CategoryController : ControllerBase
 {
 	private readonly DataContext _dataContext;
 
-	private readonly IEmailService _emailService;
-
-	private readonly IEmailSender _emailSender;
-	private readonly ISmsService _smsService;
-	public CategoryController(DataContext dataContext, IEmailService emailService = null, IEmailSender emailSender = null, ISmsService smsService = null)
+	
+	public CategoryController(DataContext dataContext)
 	{
 		_dataContext = dataContext;
-		_emailService = emailService;
-		_emailSender = emailSender;
-		_smsService = smsService;
+		
 	}
 
 	[HttpGet("get-all")]

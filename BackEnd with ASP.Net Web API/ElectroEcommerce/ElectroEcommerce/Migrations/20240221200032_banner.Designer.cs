@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ElectroEcommerce.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ElectroEcommerce.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240221200032_banner")]
+    partial class banner
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,35 +58,6 @@ namespace ElectroEcommerce.Migrations
                         .IsUnique();
 
                     b.ToTable("ActivationTokens");
-                });
-
-            modelBuilder.Entity("ElectroEcommerce.DataBase.Models.Banner", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("BannerPrefix")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<List<string>>("Files")
-                        .HasColumnType("text[]");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Banners");
                 });
 
             modelBuilder.Entity("ElectroEcommerce.DataBase.Models.Brand", b =>
@@ -404,7 +377,7 @@ namespace ElectroEcommerce.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cfff0bcc-b9df-4c01-9a32-aa61c3fdadf3"),
+                            Id = new Guid("f4263b58-b1e4-4a15-b53e-f370f016cdf8"),
                             ApplicationPassword = "",
                             ConfirmedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),

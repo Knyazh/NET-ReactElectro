@@ -35,19 +35,17 @@ public class VerificationSerivce : IVerificationService
 
 	public string HashPassword(string password)
 	{
-		using (SHA256 sha256 = SHA256.Create())
+		using SHA256 sha256 = SHA256.Create();
+
+		byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+		StringBuilder builder = new();
+		for (int i = 0; i < hashedBytes.Length; i++)
 		{
-
-			byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-			StringBuilder builder = new StringBuilder();
-			for (int i = 0; i < hashedBytes.Length; i++)
-			{
-				builder.Append(hashedBytes[i].ToString("x2"));
-			}
-
-			return builder.ToString();
+			builder.Append(hashedBytes[i].ToString("x2"));
 		}
+
+		return builder.ToString();
 	}
 	public bool VerifyPassword(string password, string hashedPassword)
 	{
@@ -61,32 +59,28 @@ public class VerificationSerivce : IVerificationService
 	{
 		int byteSize = keySizeInBits / 8;
 
-		using (var provider = new RNGCryptoServiceProvider())
-		{
-			byte[] keyData = new byte[byteSize];
-			provider.GetBytes(keyData);
-			return Convert.ToBase64String(keyData);
-		}
+		using var provider = new RNGCryptoServiceProvider();
+		byte[] keyData = new byte[byteSize];
+		provider.GetBytes(keyData);
+		return Convert.ToBase64String(keyData);
 	}
 
 	public string GenerateAppPassword(int length = 16)
 	{
 		const string validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-		using (var rng = new RNGCryptoServiceProvider())
+		using var rng = new RNGCryptoServiceProvider();
+		byte[] tokenData = new byte[length];
+		rng.GetBytes(tokenData);
+
+		char[] chars = new char[length];
+		int validCharCount = validChars.Length;
+
+		for (int i = 0; i < length; i++)
 		{
-			byte[] tokenData = new byte[length];
-			rng.GetBytes(tokenData);
-
-			char[] chars = new char[length];
-			int validCharCount = validChars.Length;
-
-			for (int i = 0; i < length; i++)
-			{
-				chars[i] = validChars[tokenData[i] % validCharCount];
-			}
-
-			return new string(chars);
+			chars[i] = validChars[tokenData[i] % validCharCount];
 		}
+
+		return new string(chars);
 	}
 }

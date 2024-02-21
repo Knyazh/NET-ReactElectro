@@ -128,6 +128,7 @@ public class DataContext : DbContext
 	public DbSet<ActivationToken> ActivationTokens { get; set; }
 	public DbSet<Email> Emails { get; set; }
 	public DbSet<Brand> Brands { get; set; }
+	public DbSet<Banner> Banners { get; set; }
 
 
 
