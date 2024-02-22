@@ -1,45 +1,38 @@
 import Carousel from 'react-bootstrap/Carousel';
 import './simpleslider.css'
-import img1 from '../../images/Carousel/laptop-slider-banner-rtx-3060-1586px-615px-v2.jpg'
-import img2 from '../../images/Carousel/honor-magic-2-banner.jpg'
-import img3 from '../../images/Carousel/black-friday-super-sale-facebook-cover-template_106176-1576.jpg'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function SimpleSlider() {
+
+  const [banners, setBanners] = useState([]);
+
+  useEffect(() => {
+    const getBanners = async () => {
+      await axios
+        .get("https://localhost:7010/api/banner/get-all")
+        .then((response) => setBanners(response.data))
+        .catch((err) => console.log(err));
+    };
+
+    getBanners();
+  }, []);
+
   return (
     <Carousel fade className='carousel'>
-       <Carousel.Item className='carousel-item'>
-        <img
-          className="d-block w-100"
-          src={img1}
-          alt="First slide"
-        />
-        <Carousel.Caption className='carousel-caption'>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src={img2}
-          alt="First slide"
-        />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src={img3}
-          alt="First slide"
-        />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
+      {banners.map((banner) => (
+        <Carousel.Item key={banner.id} className='carousel-item'>
+          <img
+            className="d-block w-100"
+            src={banner.file}
+            alt="Banner"
+          />
+          <Carousel.Caption className='carousel-caption'>
+            <h3>{banner.name}</h3>
+            <p>{banner.description}</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      ))}
     </Carousel>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CategoryAPI from '../../../utils/categoryApi';
 import './products.css'; 
+import ProductApi from '../../../utils/productApi';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -14,9 +15,10 @@ const Products = () => {
     brand: '',
     category: '',
   });
+  const [updateProductId, setUpdateProductId] = useState(null);
 
   useEffect(() => {
-    axios.get('example.api/products')
+    axios.get('https://localhost:7010/api/v1/product')
       .then(response => {
         setProducts(response.data);
       })
@@ -58,7 +60,7 @@ const Products = () => {
     formData.append('brand', newProduct.brand);
     formData.append('category', newProduct.category);
 
-    axios.post('example.api/products', formData)
+    axios.post(`${ProductApi.baseURL}`, formData)
       .then(response => {
         setProducts(prevProducts => [...prevProducts, response.data]);
         setNewProduct({
@@ -73,6 +75,58 @@ const Products = () => {
       .catch(error => {
         console.error('Error adding product', error);
       });
+  };
+
+  const handleDelete = (id) => {
+    axios.delete(`${ProductApi.baseURL}/${id}`)
+      .then(() => {
+        setProducts(prevProducts => prevProducts.filter(product => product.id !== id));
+      })
+      .catch(error => {
+        console.error('Error deleting product', error);
+      });
+  };
+
+  const handleUpdate = (id) => {
+    const updatedProduct = products.find(product => product.id === id);
+    setNewProduct({
+      name: updatedProduct.name,
+      description: updatedProduct.description,
+      price: updatedProduct.price,
+      image: updatedProduct.image,
+      brand: updatedProduct.brand,
+      category: updatedProduct.category,
+    });
+    setUpdateProductId(id);
+  };
+
+  const updateProduct = async () => {
+    const formData = new FormData();
+    formData.append('name', newProduct.name);
+    formData.append('description', newProduct.description);
+    formData.append('price', newProduct.price);
+    formData.append('image', newProduct.image);
+    formData.append('brand', newProduct.brand);
+    formData.append('category', newProduct.category);
+
+    try {
+      const response = await axios.put(`${ProductApi.baseURL}/${updateProductId}`, formData);
+      const updatedProductIndex = products.findIndex(product => product.id === updateProductId);
+      const updatedProducts = [...products];
+      updatedProducts[updatedProductIndex] = response.data;
+      setProducts(updatedProducts);
+      setUpdateProductId(null);
+      setNewProduct({
+        name: '',
+        description: '',
+        price: 0,
+        image: null,
+        brand: '',
+        category: '',
+      });
+    } catch (error) {
+      console.error('Error updating product', error);
+    }
   };
 
   return (
@@ -136,6 +190,7 @@ const Products = () => {
               <th>Image</th>
               <th>Brand</th>
               <th>Category</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -144,9 +199,13 @@ const Products = () => {
                 <td>{product.name}</td>
                 <td>{product.description}</td>
                 <td>{product.price}</td>
-                <td><img src={`path/to/local/images/${product.image}`} alt={product.name} /></td>
+                <td><img src={product.image} alt={product.name} /></td>
                 <td>{product.brand}</td>
                 <td>{product.category}</td>
+                <td>
+                  <button onClick={() => handleUpdate(product.id)}>Update</button>
+                  <button onClick={() => handleDelete(product.id)}>Delete</button>
+                </td>
               </tr>
             ))}
           </tbody>

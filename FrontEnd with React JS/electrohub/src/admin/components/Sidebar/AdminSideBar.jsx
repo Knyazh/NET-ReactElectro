@@ -47,17 +47,17 @@ const AdminSideBar = () => {
       </Link>
       <Link
         to="/admin/colors"
-        className={`list-group-item list-group-item-action py-2 ripple ${activeLink === '/seo' ? 'active' : ''}`}
+        className={`list-group-item list-group-item-action py-2 ripple ${activeLink === '/colors' ? 'active' : ''}`}
         onClick={() => handleLinkClick('/admin/colors')}
       >
-        <i className="fas fa-chart-pie fa-fw me-3"></i><span>SEO</span>
+        <i className="fas fa-chart-pie fa-fw me-3"></i><span>Colors</span>
       </Link>
       <Link
-        to="/orders"
-        className={`list-group-item list-group-item-action py-2 ripple ${activeLink === '/orders' ? 'active' : ''}`}
-        onClick={() => handleLinkClick('/orders')}
+        to="/admin/banners"
+        className={`list-group-item list-group-item-action py-2 ripple ${activeLink === '/banners' ? 'active' : ''}`}
+        onClick={() => handleLinkClick('/banners')}
       >
-        <i className="fas fa-chart-bar fa-fw me-3"></i><span>Orders</span>
+        <i className="fas fa-chart-bar fa-fw me-3"></i><span>Banners</span>
       </Link>
       <Link
         to="/international"
