@@ -99,6 +99,26 @@ public class DataContext : DbContext
 			   .HasForeignKey(o => o.OrderId);
 		#endregion
 
+		#region 1x Many Users and BasketItem
+
+		modelBuilder.Entity<BasketItem>()
+			   .HasOne<User>(bi => bi.User)
+			   .WithMany(u => u.BasketItems)
+			   .HasForeignKey(bi => bi.CurrentUserID);
+		#endregion
+
+		#region 1x Many order and user orderitem and user
+		modelBuilder.Entity<Order>()
+			 .HasOne<User>(o => o.User)
+			 .WithMany(u => u.Orders)
+			 .HasForeignKey(o => o.UserId);
+
+		modelBuilder.Entity<OrderItem>()
+		   .HasOne<Order>(oi => oi.Order)
+		   .WithMany(o => o.OrderItems)
+		   .HasForeignKey(oi => oi.OrderId);
+		#endregion
+
 		#region Admin Seeding
 		modelBuilder.Entity<User>().HasData(
 			new User
@@ -129,6 +149,7 @@ public class DataContext : DbContext
 	public DbSet<Email> Emails { get; set; }
 	public DbSet<Brand> Brands { get; set; }
 	public DbSet<Banner> Banners { get; set; }
+	public DbSet<BasketItem> BasketItems { get; set; }
 
 
 

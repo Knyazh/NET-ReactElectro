@@ -170,8 +170,8 @@ namespace ElectroEcommerce.Controllers
 			}
 			catch (Exception exception)
 			{
-				_logger.LogError(exception, "An error occurred while processing the request.");
-				return StatusCode(500, "An error occurred while processing the request. Please try again later.");
+				_logger.LogError(exception, "Processing error");
+				return StatusCode(500, exception.Message);
 			}
 		}
 		[HttpGet("search")]

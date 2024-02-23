@@ -28,6 +28,7 @@ public class AuthenticationController : ControllerBase
 		private readonly INotificationService _notificationService;
 		private readonly IUserService _user_Service;
 		private readonly ILogger<AuthenticationController> _logger;
+		private readonly IBasketService _basketService;
 
 	public AuthenticationController(DataContext dataContext,
 		IVerificationService verificationService,
@@ -35,7 +36,8 @@ public class AuthenticationController : ControllerBase
 		IActivationService activationSerive,
 		INotificationService notificationService,
 		IUserService user_Service,
-		ILogger<AuthenticationController> logger)
+		ILogger<AuthenticationController> logger,
+		IBasketService basketService)
 	{
 		_dataContext = dataContext;
 		_verificationService = verificationService;
@@ -44,6 +46,7 @@ public class AuthenticationController : ControllerBase
 		_notificationService = notificationService;
 		_user_Service = user_Service;
 		_logger = logger;
+		_basketService = basketService;
 	}
 
 	[HttpPost("auth/register")]
@@ -262,6 +265,11 @@ public class AuthenticationController : ControllerBase
 	[HttpGet("auth/logout")]
 	public async Task<IActionResult> Logout()
 	{
+
+		_basketService.ClearBasketItems();
+		_dataContext.BasketItems.RemoveRange(_dataContext.BasketItems.
+			Where(b => b.CurrentUserID.Equals(_user_Service.CurrentUser.Id)));
+		await _dataContext.SaveChangesAsync();
 		await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
 		return NoContent();

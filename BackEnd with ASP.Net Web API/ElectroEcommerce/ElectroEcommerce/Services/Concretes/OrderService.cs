@@ -1,32 +1,26 @@
-﻿using ElectroEcommerce.Services.Abstracts;
+﻿using ElectroEcommerce.Contracts;
+using ElectroEcommerce.DataBase.DTOs.Order;
+using ElectroEcommerce.Services.Abstracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace ElectroEcommerce.Services.Concretes;
 
 public class OrderService : IOrderService
 {
-	private readonly DataContext _dbContext;
-	private readonly Random _random;
-	private const string TRACKINGCODE_PREFIX = "OR";
-
-	public OrderService(DataContext dbContext)
+	private readonly IEmailService _emailService;
+	private readonly IUserService _userService;
+	public OrderService(IEmailService email_service, IUserService user_service)
 	{
-		_dbContext = dbContext;
-		_random = new Random();
+		_emailService = email_service;
+		_userService = user_service;
 	}
 
-	public string GenerateTrackingCode()
+	public async Task<string> PrepareAndSendOrderInvoiceAsync(OrderDetailsDTO DTO)
 	{
-		string trackingCode;
+		var emailBody = InVoice.GenerateInvoiceHtml(DTO);
+		await _emailService
+			.SendEmailAsync(_userService.CurrentUser.Email, EmailTemplate.Subject.Order_Invoice, emailBody);
 
-		do
-		{
-			int numberPart = _random.Next(100000, 1000000);
-			trackingCode = TRACKINGCODE_PREFIX + numberPart;
-
-		} while (_dbContext.Orders.Any(o => o.TrackingCode == trackingCode));
-
-
-		return trackingCode;
+		return emailBody;
 	}
 }

@@ -29,8 +29,8 @@ public class ProductModel : BaseEntity<Guid>, IAuditable
 		private set { }
 	}
 
-	public List<string> PyshicalImageNames { get; set; }= new List<string>();
-    public string ProductPrefix { get; set; }
+	public string[] PyshicalImageNames { get; set; } = new string[] { };
+	public string ProductPrefix { get; set; } = string.Empty;
 
 	public DateTime CreatedAt { get; set; }
 	public DateTime UpdatedAt { get; set; }

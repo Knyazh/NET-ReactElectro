@@ -112,6 +112,53 @@
           }
         }
       },
+      "Microsoft.AspNetCore.JsonPatch/6.0.27": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.AspNetCore.JsonPatch.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.JsonPatch.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Mvc.NewtonsoftJson/6.0.27": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.JsonPatch": "6.0.27",
+          "Newtonsoft.Json": "13.0.1",
+          "Newtonsoft.Json.Bson": "1.0.2"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Microsoft.CSharp/4.7.0": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/_._": {}
+        }
+      },
       "Microsoft.EntityFrameworkCore/6.0.26": {
         "type": "package",
         "dependencies": {
@@ -446,6 +493,22 @@
           }
         }
       },
+      "Newtonsoft.Json.Bson/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "Npgsql/6.0.10": {
         "type": "package",
         "dependencies": {
@@ -481,6 +544,19 @@
           }
         }
       },
+      "PdfSharpCore/1.1.21": {
+        "type": "package",
+        "dependencies": {
+          "SixLabors.Fonts": "1.0.0-beta0009",
+          "SixLabors.ImageSharp": "1.0.0-beta0006"
+        },
+        "compile": {
+          "lib/netstandard2.0/PdfSharpCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/PdfSharpCore.dll": {}
+        }
+      },
       "Polly/7.2.3": {
         "type": "package",
         "compile": {
@@ -491,6 +567,69 @@
         "runtime": {
           "lib/netstandard2.0/Polly.dll": {
             "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Polybioz.HtmlRenderer.PdfSharp.Core/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "PdfSharpCore": "1.1.21"
+        },
+        "compile": {
+          "lib/netcoreapp2.1/HtmlRenderer.Core.dll": {},
+          "lib/netcoreapp2.1/HtmlRenderer.PdfSharp.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/HtmlRenderer.Core.dll": {},
+          "lib/netcoreapp2.1/HtmlRenderer.PdfSharp.Core.dll": {}
+        }
+      },
+      "SixLabors.Core/1.0.0-beta0008": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "4.5.1"
+        },
+        "compile": {
+          "lib/netcoreapp2.1/SixLabors.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/SixLabors.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "SixLabors.Fonts/1.0.0-beta0009": {
+        "type": "package",
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0008"
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.Fonts.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.Fonts.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "SixLabors.ImageSharp/1.0.0-beta0006": {
+        "type": "package",
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0007",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.1"
+        },
+        "compile": {
+          "lib/netcoreapp2.1/SixLabors.ImageSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/SixLabors.ImageSharp.dll": {
+            "related": ".xml"
           }
         }
       },
@@ -859,6 +998,109 @@
         "lib/netstandard2.1/MailKit.xml",
         "mailkit.4.3.0.nupkg.sha512",
         "mailkit.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.JsonPatch/6.0.27": {
+      "sha512": "Gxcho1GPqstlPjE9q9V3L0MEx5sm1OyttfGW25tA7UJoDRpIEGQEOPMm3qL/JwDPxygrh8N7JUHFUP8i999pmg==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.jsonpatch/6.0.27",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.AspNetCore.JsonPatch.dll",
+        "lib/net461/Microsoft.AspNetCore.JsonPatch.xml",
+        "lib/net6.0/Microsoft.AspNetCore.JsonPatch.dll",
+        "lib/net6.0/Microsoft.AspNetCore.JsonPatch.xml",
+        "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.xml",
+        "microsoft.aspnetcore.jsonpatch.6.0.27.nupkg.sha512",
+        "microsoft.aspnetcore.jsonpatch.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Mvc.NewtonsoftJson/6.0.27": {
+      "sha512": "OCwxyqAXcRyt3ywm2kXIBUT8A85xtYlh+LgS25JErP5Hu9kr9rOfDLKUrJ1lMdVasj+7zj2y6gHCAQDdnP046Q==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.mvc.newtonsoftjson/6.0.27",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll",
+        "lib/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.xml",
+        "microsoft.aspnetcore.mvc.newtonsoftjson.6.0.27.nupkg.sha512",
+        "microsoft.aspnetcore.mvc.newtonsoftjson.nuspec"
+      ]
+    },
+    "Microsoft.CSharp/4.7.0": {
+      "sha512": "pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "type": "package",
+      "path": "microsoft.csharp/4.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/Microsoft.CSharp.dll",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.3/Microsoft.CSharp.dll",
+        "lib/netstandard2.0/Microsoft.CSharp.dll",
+        "lib/netstandard2.0/Microsoft.CSharp.xml",
+        "lib/portable-net45+win8+wp8+wpa81/_._",
+        "lib/uap10.0.16299/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "microsoft.csharp.4.7.0.nupkg.sha512",
+        "microsoft.csharp.nuspec",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/netcore50/Microsoft.CSharp.dll",
+        "ref/netcore50/Microsoft.CSharp.xml",
+        "ref/netcore50/de/Microsoft.CSharp.xml",
+        "ref/netcore50/es/Microsoft.CSharp.xml",
+        "ref/netcore50/fr/Microsoft.CSharp.xml",
+        "ref/netcore50/it/Microsoft.CSharp.xml",
+        "ref/netcore50/ja/Microsoft.CSharp.xml",
+        "ref/netcore50/ko/Microsoft.CSharp.xml",
+        "ref/netcore50/ru/Microsoft.CSharp.xml",
+        "ref/netcore50/zh-hans/Microsoft.CSharp.xml",
+        "ref/netcore50/zh-hant/Microsoft.CSharp.xml",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard1.0/Microsoft.CSharp.dll",
+        "ref/netstandard1.0/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/de/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/es/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/fr/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/it/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/ja/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/ko/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/ru/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/zh-hans/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/zh-hant/Microsoft.CSharp.xml",
+        "ref/netstandard2.0/Microsoft.CSharp.dll",
+        "ref/netstandard2.0/Microsoft.CSharp.xml",
+        "ref/portable-net45+win8+wp8+wpa81/_._",
+        "ref/uap10.0.16299/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "Microsoft.EntityFrameworkCore/6.0.26": {
@@ -1535,6 +1777,27 @@
         "packageIcon.png"
       ]
     },
+    "Newtonsoft.Json.Bson/1.0.2": {
+      "sha512": "QYFyxhaABwmq3p/21VrZNYvCg3DaEoN/wUuw5nmfAf0X3HLjgupwhkEWdgfb9nvGAUIv3osmZoD3kKl4jxEmYQ==",
+      "type": "package",
+      "path": "newtonsoft.json.bson/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net45/Newtonsoft.Json.Bson.dll",
+        "lib/net45/Newtonsoft.Json.Bson.pdb",
+        "lib/net45/Newtonsoft.Json.Bson.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.Bson.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.Bson.pdb",
+        "lib/netstandard1.3/Newtonsoft.Json.Bson.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.Bson.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.Bson.pdb",
+        "lib/netstandard2.0/Newtonsoft.Json.Bson.xml",
+        "newtonsoft.json.bson.1.0.2.nupkg.sha512",
+        "newtonsoft.json.bson.nuspec"
+      ]
+    },
     "Npgsql/6.0.10": {
       "sha512": "vitwybpiG32EUOScHSjr1kTej8PwoYEWjHwTel5lwsq0OY4p0LJd80ZeGQHLa6zq12hsq9vyAfT9K80iWrpxPA==",
       "type": "package",
@@ -1573,6 +1836,19 @@
         "postgresql.png"
       ]
     },
+    "PdfSharpCore/1.1.21": {
+      "sha512": "ZD83JHSAZgnnKjBQc4PgFEBNqUKHrmcSYaM2F5IKMhkjGbT6k30ejIyIwcR7PXVhXK/qSHRALExs3ToslHP/GQ==",
+      "type": "package",
+      "path": "pdfsharpcore/1.1.21",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard1.3/PdfSharpCore.dll",
+        "lib/netstandard2.0/PdfSharpCore.dll",
+        "pdfsharpcore.1.1.21.nupkg.sha512",
+        "pdfsharpcore.nuspec"
+      ]
+    },
     "Polly/7.2.3": {
       "sha512": "DeCY0OFbNdNxsjntr1gTXHJ5pKUwYzp04Er2LLeN3g6pWhffsGuKVfMBLe1lw7x76HrPkLxKEFxBlpRxS2nDEQ==",
       "type": "package",
@@ -1595,6 +1871,73 @@
         "lib/netstandard2.0/Polly.xml",
         "polly.7.2.3.nupkg.sha512",
         "polly.nuspec"
+      ]
+    },
+    "Polybioz.HtmlRenderer.PdfSharp.Core/1.0.0": {
+      "sha512": "C9EojDjpA8AVgYanheShfuvwpvUcUWpQgXEgSftcWMzicTo5+HU7Dni34xipmUV3YWoq+DO3dW4vuHJlAV2ybQ==",
+      "type": "package",
+      "path": "polybioz.htmlrenderer.pdfsharp.core/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "lib/netcoreapp2.1/HtmlRenderer.Core.dll",
+        "lib/netcoreapp2.1/HtmlRenderer.PdfSharp.Core.dll",
+        "polybioz.htmlrenderer.pdfsharp.core.1.0.0.nupkg.sha512",
+        "polybioz.htmlrenderer.pdfsharp.core.nuspec"
+      ]
+    },
+    "SixLabors.Core/1.0.0-beta0008": {
+      "sha512": "rrKPDN107tVOh+mUoNh+kHELa7WfYZREPPbYdiKJ3Rd6dex/UgDWDGBOjPJn4BBhmts/VGuaXMXyfT/BwiuH2g==",
+      "type": "package",
+      "path": "sixlabors.core/1.0.0-beta0008",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netcoreapp2.0/SixLabors.Core.dll",
+        "lib/netcoreapp2.0/SixLabors.Core.xml",
+        "lib/netcoreapp2.1/SixLabors.Core.dll",
+        "lib/netcoreapp2.1/SixLabors.Core.xml",
+        "lib/netstandard1.3/SixLabors.Core.dll",
+        "lib/netstandard1.3/SixLabors.Core.xml",
+        "lib/netstandard2.0/SixLabors.Core.dll",
+        "lib/netstandard2.0/SixLabors.Core.xml",
+        "sixlabors.core.1.0.0-beta0008.nupkg.sha512",
+        "sixlabors.core.nuspec"
+      ]
+    },
+    "SixLabors.Fonts/1.0.0-beta0009": {
+      "sha512": "jCSh8Ei/epW1zInmRReIovIzHGPB1zifwDaj4+Yb7aGCs5MbRHi69kl2+QM9Ov5X19IgKhHn833dd4S0OQ3sEw==",
+      "type": "package",
+      "path": "sixlabors.fonts/1.0.0-beta0009",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard1.3/SixLabors.Fonts.dll",
+        "lib/netstandard1.3/SixLabors.Fonts.xml",
+        "lib/netstandard2.0/SixLabors.Fonts.dll",
+        "lib/netstandard2.0/SixLabors.Fonts.xml",
+        "sixlabors.fonts.1.0.0-beta0009.nupkg.sha512",
+        "sixlabors.fonts.nuspec"
+      ]
+    },
+    "SixLabors.ImageSharp/1.0.0-beta0006": {
+      "sha512": "VHDX00uAzPWj5qFYE5xJZyr5Cx4Jtd3p2dfX7swSrzlQoPEZPXXwQ+O3Fc4hNWvaNvR1NAiXSb27Ts6yv3lMDw==",
+      "type": "package",
+      "path": "sixlabors.imagesharp/1.0.0-beta0006",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net472/SixLabors.ImageSharp.dll",
+        "lib/net472/SixLabors.ImageSharp.xml",
+        "lib/netcoreapp2.1/SixLabors.ImageSharp.dll",
+        "lib/netcoreapp2.1/SixLabors.ImageSharp.xml",
+        "lib/netstandard1.3/SixLabors.ImageSharp.dll",
+        "lib/netstandard1.3/SixLabors.ImageSharp.xml",
+        "lib/netstandard2.0/SixLabors.ImageSharp.dll",
+        "lib/netstandard2.0/SixLabors.ImageSharp.xml",
+        "sixlabors.imagesharp.1.0.0-beta0006.nupkg.sha512",
+        "sixlabors.imagesharp.nuspec"
       ]
     },
     "Swashbuckle.AspNetCore/6.5.0": {
@@ -1993,9 +2336,11 @@
       "FluentValidation.AspNetCore >= 11.3.0",
       "Infobip.Api.Client >= 2.1.3",
       "MailKit >= 4.3.0",
+      "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 6.0.27",
       "Microsoft.EntityFrameworkCore >= 6.0.26",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.26",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 6.0.22",
+      "Polybioz.HtmlRenderer.PdfSharp.Core >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0",
       "System.Drawing.Common >= 8.0.2"
     ]
@@ -2056,6 +2401,10 @@
             "target": "Package",
             "version": "[4.3.0, )"
           },
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+            "target": "Package",
+            "version": "[6.0.27, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[6.0.26, )"
@@ -2069,6 +2418,10 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
             "version": "[6.0.22, )"
+          },
+          "Polybioz.HtmlRenderer.PdfSharp.Core": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

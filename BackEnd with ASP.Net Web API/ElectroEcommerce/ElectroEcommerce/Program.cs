@@ -3,6 +3,8 @@ using ElectroEcommerce.Services.Abstracts;
 using ElectroEcommerce.Services.Concretes;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.CookiePolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ElectroEcommerce;
@@ -13,11 +15,14 @@ public class Program
 	{
 		var builder = WebApplication.CreateBuilder(args);
 		builder.Services.AddControllers();
-			//.AddFluentValidation(x =>
-			//{
-			//	x.ImplicitlyValidateChildProperties = true;
-			//	x.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-			//});
+		//.AddFluentValidation(x =>
+		//{
+		//	x.ImplicitlyValidateChildProperties = true;
+		//	x.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+		//});
+
+
+		AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 		builder.Services
 		.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -30,11 +35,13 @@ public class Program
 		});
 
 		builder.Services.AddLogging();
+		builder.Services.AddEndpointsApiExplorer();
+		builder.Services.AddSwaggerGen();
+
 		builder.Services.AddDbContext<DataContext>(options =>
 		{
 			options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
 		})
-
 		.AddScoped<IFileService, FileService>()
 		.AddScoped<IActivationService, ActivationService>()
 		.AddScoped<IEmailService, EmailService>()
@@ -65,6 +72,19 @@ public class Program
 			SeedData.SeedDatabase(dbContext);
 		}
 
+
+		builder.Services.Configure<CookiePolicyOptions>(options =>
+		{
+			options.MinimumSameSitePolicy = SameSiteMode.None;
+			options.HttpOnly = HttpOnlyPolicy.Always;
+			options.Secure = CookieSecurePolicy.Always;
+		});
+
+		builder.Services.Configure<ApiBehaviorOptions>(c =>
+		{
+			c.SuppressModelStateInvalidFilter = true;
+		});
+
 		var app = builder.Build();
 
 		if (app.Environment.IsDevelopment())
@@ -73,11 +93,11 @@ public class Program
 			app.UseSwaggerUI();
 		}
 
+		app.UseStaticFiles();
 		app.UseCors("AllowAll");
 		app.UseHttpsRedirection();
-		app.UseHttpsRedirection();
-
 		app.UseAuthorization();
+		app.UseAuthentication();
 
 
 		app.MapControllers();

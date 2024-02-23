@@ -5,7 +5,6 @@ namespace ElectroEcommerce.DataBase.Models;
 
 public class Order : BaseEntity<Guid>, IAuditable
 {
-	public OrderStatus Status { get; set; }
 	public string TrackingCode { get; set; }
 
 	public Guid UserId { get; set; }
@@ -16,4 +15,8 @@ public class Order : BaseEntity<Guid>, IAuditable
 	public DateTime UpdatedAt { get; set; }
 
 	public List<OrderItem> OrderItems { get; set; }
+
+
+	public string CurrentOrderStatus { get; set; } = string.Empty;
+	public decimal OrderTotalPrice { get; set; }
 }

@@ -47,7 +47,7 @@ public class ProductController : ControllerBase
 				Price= p.Price,
 				Quantity= p.Quantity,
 				IsAvailable= p.IsAvailable,
-				PhisicalImageNames = _fileService.ReadStaticFiles(p.ProductPrefix, CustomUploadDirectories.Products, p.PyshicalImageNames),
+				PhisicalImageNames = _fileService.ReadStaticFiles(p.ProductPrefix, CustomUploadDirectories.Products, p.PyshicalImageNames.ToList()),
 				CreatedAt = p.CreatedAt,
 				UpdatedAt = p.UpdatedAt,
 				ProductPrefix = p.ProductPrefix,
@@ -117,8 +117,8 @@ public class ProductController : ControllerBase
 
 			if (productPostDto.PyshicalImageNames.Count > 0)
 		{
-			product.PyshicalImageNames = await _fileService
-				.UploadAsync(CustomUploadDirectories.Products, productPostDto.PyshicalImageNames, product.ProductPrefix);
+			product.PyshicalImageNames = (await _fileService
+				.UploadAsync(CustomUploadDirectories.Products, productPostDto.PyshicalImageNames, product.ProductPrefix)).ToArray();
 		}
 
 		 await _dataContext.Products.AddAsync(product);
@@ -130,7 +130,7 @@ public class ProductController : ControllerBase
 			{
 				var color = await _dataContext.Colors.SingleOrDefaultAsync(c => c.Id.Equals(ColorId));
 				if (color is null)
-					return NotFound($"The color with the << {ColorId} >> number you are looking for does not already exist in the database!");
+					return NotFound($"The color with the  {ColorId}   Does not exist yet");
 
 				var product_color = new ProductColor
 				{
@@ -185,7 +185,7 @@ public class ProductController : ControllerBase
 				CreatedAt = product.CreatedAt,
 				UpdatedAt = product.UpdatedAt,
 				PhisicalImageNames = _fileService
-				.ReadStaticFiles(product.ProductPrefix, CustomUploadDirectories.Products, product.PyshicalImageNames),
+				.ReadStaticFiles(product.ProductPrefix, CustomUploadDirectories.Products, product.PyshicalImageNames.ToList()),
 
 				Brand = _dataContext.Brands
 				.SingleOrDefault(br => br.Id.Equals(product.CurrentBrandId))!,
@@ -222,7 +222,7 @@ public class ProductController : ControllerBase
 		{
 			var product = await _dataContext.Products.SingleOrDefaultAsync(pr => pr.Id.Equals(Id));
 			if (product is null)
-				return NotFound($"The product with the << {Id} >> number you are looking for does not already exist in the database!");
+				return NotFound($"The product with the << {Id} >>  Does not exist yet");
 
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);
@@ -237,7 +237,7 @@ public class ProductController : ControllerBase
 
 			if ((await _dataContext.Brands.AnyAsync(br => br.Id.Equals(productPostDto.CurrentBrandId))) is false)
 			{
-				return NotFound($"The brand with the << {productPostDto.CurrentBrandId} >> number you are looking for does not already exist in the database!");
+				return NotFound($"The brand with the {productPostDto.CurrentBrandId}   Does not exist yet");
 			}
 
 			product.CurrentBrandId = productPostDto.CurrentBrandId;
@@ -245,11 +245,11 @@ public class ProductController : ControllerBase
 			if (productPostDto.PyshicalImageNames.Count > 0)
 			{
 				_fileService
-					.RemoveStaticFiles(product.ProductPrefix,CustomUploadDirectories.Products,product.PyshicalImageNames);
+					.RemoveStaticFiles(product.ProductPrefix,CustomUploadDirectories.Products,product.PyshicalImageNames.ToList());
 
-				product.PyshicalImageNames = await _fileService
+				product.PyshicalImageNames = (await _fileService
 					.UploadAsync(CustomUploadDirectories.Products,
-					productPostDto.PyshicalImageNames, product.ProductPrefix);
+					productPostDto.PyshicalImageNames, product.ProductPrefix)).ToArray();
 			}
 
 			_dataContext.Products.Update(product);
@@ -264,7 +264,7 @@ public class ProductController : ControllerBase
 					var color = await _dataContext.Colors.SingleOrDefaultAsync(c => c.Id.Equals(colorId));
 					if (color is null)
 					{
-						return NotFound($"The color with the << {colorId} >> number you are looking for does not already exist in the database!");
+						return NotFound($"The color with the  {colorId}   Does not exist yet");
 					}
 					var removableProductColor = removeableProductColors.SingleOrDefault(pc => pc.ColorId.Equals(colorId));
 					if (removableProductColor is null)
@@ -305,11 +305,25 @@ public class ProductController : ControllerBase
 	{
 		try
 		{
-			var product = await _dataContext.Products.FindAsync(Id);
+			var product = await _dataContext.Products.SingleOrDefaultAsync(p=>p.Id.Equals(Id));
 
 			if (product == null)
 			{
 				return NotFound($"The product with the id {Id} was not found.");
+			}
+
+			if (product.PyshicalImageNames.ToList().Count > 0)
+			{
+				_fileService
+				   .RemoveStaticFiles(product.ProductPrefix, CustomUploadDirectories.Products, product.PyshicalImageNames.ToList());
+			}
+
+
+			var removeableProductColors = await _dataContext.ProductColors
+				   .Where(pc => pc.ProductId.Equals(product.Id)).ToListAsync();
+			if (removeableProductColors.Count > 0)
+			{
+				_dataContext.ProductColors.RemoveRange(removeableProductColors);
 			}
 
 			_dataContext.Products.Remove(product);
@@ -321,6 +335,49 @@ public class ProductController : ControllerBase
 		{
 			_logger.LogError(ex, "Error deleting product");
 
+			return StatusCode(500, ex.Message);
+		}
+	}
+
+
+
+	[HttpGet("get-limited")]
+	[Produces(typeof(List<ProductListItemDto>))]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+	public async Task<IActionResult> Get([FromQuery] int limit)
+	{
+		try
+		{
+			var products = await _dataContext.Products
+				.Take(limit)
+				.Select(p => new ProductListItemDto
+				{
+					Id = p.Id,
+					Name = p.Name,
+					Description = p.Description,
+					Price = p.Price,
+					Quantity = p.Quantity,
+					IsAvailable = p.IsAvailable,
+					PhisicalImageNames = _fileService.ReadStaticFiles(p.ProductPrefix, CustomUploadDirectories.Products, p.PyshicalImageNames.ToList()),
+					CreatedAt = p.CreatedAt,
+					UpdatedAt = p.UpdatedAt,
+					ProductPrefix = p.ProductPrefix,
+					Brand = _dataContext.Brands
+						.SingleOrDefault(br => br.Id.Equals(p.CurrentBrandId))!,
+					Category = _dataContext.Categories
+						.SingleOrDefault(c => c.Id.Equals(p.CurrentCategoryId))!,
+
+					Colors = _dataContext.ProductColors
+						.Where(pc => pc.ProductId.Equals(p.Id))
+						.Select(pc => pc.Color).ToList()
+				})
+				.ToListAsync();
+			return Ok(products);
+		}
+		catch (Exception ex)
+		{
 			return StatusCode(500, ex.Message);
 		}
 	}

@@ -7,8 +7,8 @@ public class FileService : IFileService
 {
 	private readonly IWebHostEnvironment _env;
 	private readonly IHttpContextAccessor _httpContextAccessor;
-	private readonly string _filePath;
 	private readonly string _directory;
+	private readonly string _filePath;
 	private readonly string _hostURL;
 
 	public FileService(IWebHostEnvironment env, IHttpContextAccessor httpContextAccessor)

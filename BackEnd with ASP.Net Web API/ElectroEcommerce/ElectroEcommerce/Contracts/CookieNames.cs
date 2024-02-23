@@ -1,6 +1,6 @@
 ﻿namespace ElectroEcommerce.Contracts;
 
-public static class CookieNames
+public enum CookieNames
 {
-	public const string BASKET_ITEMS = "BasketItems";
+	BasketItems = 0
 }

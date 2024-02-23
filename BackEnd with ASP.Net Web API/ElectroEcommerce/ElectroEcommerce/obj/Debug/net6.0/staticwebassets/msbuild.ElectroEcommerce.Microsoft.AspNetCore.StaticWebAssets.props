@@ -1,11 +1,11 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR4800663\Banners-3c541b71-9c61-407b-b8f9-c126ad681c99..jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR3100848\Banners-4e11a46d-c0c9-447c-bbbd-f0fd88533cbd..jpg))">
       <SourceType>Package</SourceType>
       <SourceId>ElectroEcommerce</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/ElectroEcommerce</BasePath>
-      <RelativePath>Upload/images/Banners/BNR4800663/Banners-3c541b71-9c61-407b-b8f9-c126ad681c99..jpg</RelativePath>
+      <RelativePath>Upload/images/Banners/BNR3100848/Banners-4e11a46d-c0c9-447c-bbbd-f0fd88533cbd..jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -14,14 +14,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR4800663\Banners-3c541b71-9c61-407b-b8f9-c126ad681c99..jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR3100848\Banners-4e11a46d-c0c9-447c-bbbd-f0fd88533cbd..jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR9190065\Banners-87b2b563-52d0-4689-abc2-b16a1e27bd35..jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR5759550\Banners-2755c9ea-a87a-453d-934d-7228ffaf91e2..jpg))">
       <SourceType>Package</SourceType>
       <SourceId>ElectroEcommerce</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/ElectroEcommerce</BasePath>
-      <RelativePath>Upload/images/Banners/BNR9190065/Banners-87b2b563-52d0-4689-abc2-b16a1e27bd35..jpg</RelativePath>
+      <RelativePath>Upload/images/Banners/BNR5759550/Banners-2755c9ea-a87a-453d-934d-7228ffaf91e2..jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -30,7 +30,135 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR9190065\Banners-87b2b563-52d0-4689-abc2-b16a1e27bd35..jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR5759550\Banners-2755c9ea-a87a-453d-934d-7228ffaf91e2..jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR5759550\Banners-3019a482-84e6-43ad-b314-388a66f1122d..jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>ElectroEcommerce</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ElectroEcommerce</BasePath>
+      <RelativePath>Upload/images/Banners/BNR5759550/Banners-3019a482-84e6-43ad-b314-388a66f1122d..jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR5759550\Banners-3019a482-84e6-43ad-b314-388a66f1122d..jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR5759550\Banners-67e4aa19-1f22-4d84-b9f6-fa2417012ffc..jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>ElectroEcommerce</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ElectroEcommerce</BasePath>
+      <RelativePath>Upload/images/Banners/BNR5759550/Banners-67e4aa19-1f22-4d84-b9f6-fa2417012ffc..jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR5759550\Banners-67e4aa19-1f22-4d84-b9f6-fa2417012ffc..jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR5759550\Banners-b1c1a0a8-9fa0-4c49-ba38-d9b055e6d3c8..jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>ElectroEcommerce</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ElectroEcommerce</BasePath>
+      <RelativePath>Upload/images/Banners/BNR5759550/Banners-b1c1a0a8-9fa0-4c49-ba38-d9b055e6d3c8..jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR5759550\Banners-b1c1a0a8-9fa0-4c49-ba38-d9b055e6d3c8..jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR6503997\Banners-11dad047-72ca-4375-9730-3fcb6a8ade47..jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>ElectroEcommerce</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ElectroEcommerce</BasePath>
+      <RelativePath>Upload/images/Banners/BNR6503997/Banners-11dad047-72ca-4375-9730-3fcb6a8ade47..jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR6503997\Banners-11dad047-72ca-4375-9730-3fcb6a8ade47..jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR8413600\Banners-14833ae7-7099-48e0-bb4e-61ddfdb90a32..jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>ElectroEcommerce</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ElectroEcommerce</BasePath>
+      <RelativePath>Upload/images/Banners/BNR8413600/Banners-14833ae7-7099-48e0-bb4e-61ddfdb90a32..jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR8413600\Banners-14833ae7-7099-48e0-bb4e-61ddfdb90a32..jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR8626259\Banners-0ff14871-f769-491f-980c-cf4af478a634..jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>ElectroEcommerce</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ElectroEcommerce</BasePath>
+      <RelativePath>Upload/images/Banners/BNR8626259/Banners-0ff14871-f769-491f-980c-cf4af478a634..jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR8626259\Banners-0ff14871-f769-491f-980c-cf4af478a634..jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR8626259\Banners-677c8915-6fb6-4182-898d-c3e856fb23d6..jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>ElectroEcommerce</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ElectroEcommerce</BasePath>
+      <RelativePath>Upload/images/Banners/BNR8626259/Banners-677c8915-6fb6-4182-898d-c3e856fb23d6..jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR8626259\Banners-677c8915-6fb6-4182-898d-c3e856fb23d6..jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR8626259\Banners-edf224c6-05c9-4344-83d5-cfbf964a495d..jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>ElectroEcommerce</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ElectroEcommerce</BasePath>
+      <RelativePath>Upload/images/Banners/BNR8626259/Banners-edf224c6-05c9-4344-83d5-cfbf964a495d..jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Banners\BNR8626259\Banners-edf224c6-05c9-4344-83d5-cfbf964a495d..jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Brands\BRD2129555\Brands-266df6bd-0aea-487a-bee1-aae3507b3843..jpg))">
       <SourceType>Package</SourceType>
@@ -239,6 +367,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Products\CTG7075689\Products-d82d04eb-e012-4e18-a7bc-d6aa5b038a97..jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Products\CTG8620271\Products-37f9e15c-cacb-4dfc-999f-ed37543d7eee..jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>ElectroEcommerce</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ElectroEcommerce</BasePath>
+      <RelativePath>Upload/images/Products/CTG8620271/Products-37f9e15c-cacb-4dfc-999f-ed37543d7eee..jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Products\CTG8620271\Products-37f9e15c-cacb-4dfc-999f-ed37543d7eee..jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Upload\images\Users\USR8352167\Users-ff121492-3cb1-4598-8b49-0ee6162e912f..jpg))">
       <SourceType>Package</SourceType>

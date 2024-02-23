@@ -8,4 +8,5 @@ public class Prefix
 	public const string CATEGORY = "CTG";
 	public const string OrderItem = "ORD";
 	public const string BANNER = "BNR";
+	public const string ORDER = "OR";
 }

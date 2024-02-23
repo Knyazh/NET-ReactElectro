@@ -30,22 +30,22 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("ExpireDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsUsed")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime>("LastUpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("UniqueActivationToken")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -68,23 +68,69 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<List<string>>("Files")
-                        .HasColumnType("text[]");
+                    b.Property<string>("File")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
                     b.ToTable("Banners");
+                });
+
+            modelBuilder.Entity("ElectroEcommerce.DataBase.Models.BasketItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ColorID")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid>("CurrentUserID")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsAviable")
+                        .HasColumnType("boolean");
+
+                    b.Property<string[]>("PhisicalImageNames")
+                        .HasColumnType("text[]");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.Property<Guid>("ProductID")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProductPrefix")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CurrentUserID");
+
+                    b.ToTable("BasketItems");
                 });
 
             modelBuilder.Entity("ElectroEcommerce.DataBase.Models.Brand", b =>
@@ -97,7 +143,7 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -109,7 +155,7 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -123,7 +169,7 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -132,7 +178,7 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -149,13 +195,13 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -172,7 +218,7 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<List<string>>("Recipients")
                         .HasColumnType("text[]");
@@ -181,7 +227,7 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -200,16 +246,19 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("integer");
+                    b.Property<string>("CurrentOrderStatus")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("OrderTotalPrice")
+                        .HasColumnType("numeric");
 
                     b.Property<string>("TrackingCode")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -228,37 +277,43 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("OrderItemPrefix")
+                    b.Property<decimal>("OrderItemSinglePrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("OrderItemTotalPrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("PhisicalImageName")
                         .HasColumnType("text");
 
-                    b.Property<string>("ProductColorName")
-                        .HasColumnType("text");
+                    b.Property<Guid>("ProductColorID")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ProductDescription")
                         .HasColumnType("text");
 
+                    b.Property<Guid>("ProductID")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("ProductName")
                         .HasColumnType("text");
 
-                    b.Property<string>("ProductOrderPhoto")
+                    b.Property<string>("ProductPrefix")
                         .HasColumnType("text");
 
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("ProductQuantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.Property<string>("ProductSizeName")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -276,10 +331,10 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("ProductId", "ColorId");
 
@@ -295,7 +350,7 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid>("CurrentBrandId")
                         .HasColumnType("uuid");
@@ -318,14 +373,14 @@ namespace ElectroEcommerce.Migrations
                     b.Property<string>("ProductPrefix")
                         .HasColumnType("text");
 
-                    b.Property<List<string>>("PyshicalImageNames")
+                    b.Property<string[]>("PyshicalImageNames")
                         .HasColumnType("text[]");
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("numeric");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -356,10 +411,10 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("ConfirmedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
@@ -392,7 +447,7 @@ namespace ElectroEcommerce.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("UserPrefix")
                         .HasColumnType("text");
@@ -404,7 +459,7 @@ namespace ElectroEcommerce.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cfff0bcc-b9df-4c01-9a32-aa61c3fdadf3"),
+                            Id = new Guid("7dc4573c-4b5e-4f1c-a478-f34bcbd3b424"),
                             ApplicationPassword = "",
                             ConfirmedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -427,6 +482,17 @@ namespace ElectroEcommerce.Migrations
                     b.HasOne("ElectroEcommerce.DataBase.Models.User", "User")
                         .WithOne("ActivationToken")
                         .HasForeignKey("ElectroEcommerce.DataBase.Models.ActivationToken", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ElectroEcommerce.DataBase.Models.BasketItem", b =>
+                {
+                    b.HasOne("ElectroEcommerce.DataBase.Models.User", "User")
+                        .WithMany("BasketItems")
+                        .HasForeignKey("CurrentUserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -530,6 +596,8 @@ namespace ElectroEcommerce.Migrations
             modelBuilder.Entity("ElectroEcommerce.DataBase.Models.User", b =>
                 {
                     b.Navigation("ActivationToken");
+
+                    b.Navigation("BasketItems");
 
                     b.Navigation("Emails");
 

@@ -54,12 +54,8 @@ public class BannerController:ControllerBase
 				UpdatedAt = DateTime.UtcNow
 			};
 
-
-			if (bannerPostDto.Files.Count > 0)
-			{
-				banner.Files = await _fileService
-					.UploadAsync(CustomUploadDirectories.Banners, bannerPostDto.Files, banner.BannerPrefix);
-			}
+				banner.File = await _fileService
+					.UploadAsync(CustomUploadDirectories.Banners, bannerPostDto.File, banner.BannerPrefix);
 
 			await _dataContext.Banners.AddAsync(banner);
 			await _dataContext.SaveChangesAsync();
@@ -95,7 +91,7 @@ public class BannerController:ControllerBase
 				Id = b.Id,
 				Name = b.Name,
 				Description = b.Description,
-				Files = _fileService.ReadStaticFiles(b.BannerPrefix, CustomUploadDirectories.Banners, b.Files),
+				File = _fileService.ReadStaticFiles(b.BannerPrefix, CustomUploadDirectories.Banners, b.File),
 				CreatedAt = b.CreatedAt,
 				UpdatedAt = b.UpdatedAt,
 				BannerPrefix = b.BannerPrefix,
@@ -132,7 +128,7 @@ public class BannerController:ControllerBase
 				Id = banner.Id,
 				Name = banner.Name,
 				Description = banner.Description,
-				Files = _fileService.ReadStaticFiles(banner.BannerPrefix, CustomUploadDirectories.Banners, banner.Files),
+				File = _fileService.ReadStaticFiles(banner.BannerPrefix, CustomUploadDirectories.Banners, banner.File),
 				BannerPrefix = banner.BannerPrefix,
 				CreatedAt = banner.CreatedAt,
 				UpdatedAt = banner.UpdatedAt
@@ -166,10 +162,10 @@ public class BannerController:ControllerBase
 
 			if (!ModelState.IsValid) return BadRequest(ModelState);
 
-			if (bannerPostDto.Files is not null)
+			if (bannerPostDto.File is not null)
 			{
-				_fileService.RemoveStaticFiles(banner.BannerPrefix, CustomUploadDirectories.Banners, banner.Files);
-				banner.Files = await _fileService.UploadAsync(CustomUploadDirectories.Banners, bannerPostDto.Files, banner.BannerPrefix);
+				_fileService.RemoveStaticFiles(banner.BannerPrefix, CustomUploadDirectories.Banners, banner.File);
+				banner.File = await _fileService.UploadAsync(CustomUploadDirectories.Banners, bannerPostDto.File, banner.BannerPrefix);
 			}
 
 			banner.Name = bannerPostDto.Name;
@@ -203,9 +199,9 @@ public class BannerController:ControllerBase
 			if (banner is null)
 				return NotFound($"The banner this <<{Id}>> no database yet");
 
-			if (banner.Files is not null)
+			if (banner.File is not null)
 			{
-				_fileService.RemoveStaticFiles(banner.BannerPrefix, CustomUploadDirectories.Banners, banner.Files);
+				_fileService.RemoveStaticFiles(banner.BannerPrefix, CustomUploadDirectories.Banners, banner.File);
 
 			}
 
@@ -216,8 +212,8 @@ public class BannerController:ControllerBase
 		}
 		catch (Exception exception)
 		{
-			_logger.LogError(exception, "An error occurred while processing the request.");
-			return StatusCode(500, "An error occurred while processing the request. Please try again later.");
+			_logger.LogError(exception, "Processing error");
+			return StatusCode(500, exception.Message);
 		}
 	}
 }

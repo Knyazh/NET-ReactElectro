@@ -1,6 +1,8 @@
-﻿namespace ElectroEcommerce.Services.Abstracts;
+﻿using ElectroEcommerce.DataBase.DTOs.Order;
+
+namespace ElectroEcommerce.Services.Abstracts;
 
 public interface IOrderService
 {
-	string GenerateTrackingCode();
+	Task<string> PrepareAndSendOrderInvoiceAsync(OrderDetailsDTO DTO);
 }

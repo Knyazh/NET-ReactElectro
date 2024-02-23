@@ -80,7 +80,7 @@ const Header = () => {
               <div className="row ">
                 <ul className="d-flex justify-content-between">
                   <Link to='/'>Home</Link>
-                  <Link to='/products'>Tv & Audio</Link>
+                  <Link to='/products'>All Products</Link>
                   <Link>Smart Phones</Link>
                   <Link>Laptop & Desktops</Link>
                   <Link>Gadgets</Link>

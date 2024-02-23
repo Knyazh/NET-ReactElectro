@@ -2,7 +2,7 @@
 
 public interface IVerificationService
 {
-	public string RandomFolderPrefixGenerator(string prefix);
+	string RandomFolderPrefixGenerator(string prefix);
 
 	string HashPassword(string password);
 	bool VerifyPassword(string password, string hashedPassword);

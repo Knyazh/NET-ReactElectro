@@ -36,7 +36,7 @@ public class ActivationService : IActivationService
 			Body = $@"Hello dear {user.LastName} {user.Name},<br><br>
                      You can activate your account by clicking the button below:<br><br>
                      <div style=""text-align: center;"">
-                     <a href=""{activationURL}"" style=""display: inline-block; padding: 15px 45px; border-radius: 16px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; font-size: 18px; margin: 4px 2px; cursor: pointer;"">Activate Account</a>
+                     <a href=""{activationURL}"" style=""display: inline-block; padding: 15px 45px; border-radius: 16px; background-color: #BBA803; color: white; text-align: center; text-decoration: none; font-size: 20px; margin: 4px 2px; cursor: pointer;"">Click To Activate</a>
                      </div>"
 		};
 
